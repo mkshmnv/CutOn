@@ -17,7 +17,7 @@ class AuthorizationScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_authorization_screen)
 
-        editTextUsername = findViewById(R.id.editTextUsername)
+        editTextUsername = findViewById(R.id.editTextPhone)
         editTextPassword = findViewById(R.id.editTextPassword)
         buttonLogin = findViewById(R.id.buttonLogin)
 
