@@ -9,7 +9,7 @@ import android.widget.Toast
 
 class AuthorizationScreenActivity : AppCompatActivity() {
 
-    private lateinit var editTextUsername: EditText
+    private lateinit var editTextUserPhone: EditText
     private lateinit var editTextPassword: EditText
     private lateinit var buttonLogin: Button
 
@@ -17,18 +17,18 @@ class AuthorizationScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_authorization_screen)
 
-        editTextUsername = findViewById(R.id.editTextPhone)
+        editTextUserPhone = findViewById(R.id.editTextPhone)
         editTextPassword = findViewById(R.id.editTextPassword)
         buttonLogin = findViewById(R.id.buttonLogin)
 
         buttonLogin.setOnClickListener {
-            val username = editTextUsername.text.toString()
+            val userPhone = editTextUserPhone.text.toString()
             val password = editTextPassword.text.toString()
 
             // Перевірка коректності введених даних
-            if (username.isEmpty() || password.isEmpty()) {
+            if (userPhone.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Please enter your username and password", Toast.LENGTH_SHORT).show()
-            } else if (username == "admin" && password == "password") {
+            } else if (userPhone == "admin" && password == "password") {
                 // Якщо введені дані є вірними, переходимо до наступної активності
                 val intent = Intent(this, AuthorizationScreenActivity::class.java)
                 startActivity(intent)
