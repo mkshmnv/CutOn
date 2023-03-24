@@ -8,15 +8,12 @@
     android:padding="16dp">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="97dp"
+        android:layout_height="45dp"
         android:text="Вхід"
-
         android:textColor="@color/white"
         android:textSize="40sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="129dp" />
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editTextPhone"
