@@ -6,8 +6,11 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.cuton.databinding.ActivityAuthorizationScreenBinding
 
 class AuthorizationScreenActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityAuthorizationScreenBinding
 
     private lateinit var editTextUserPhone: EditText
     private lateinit var editTextPassword: EditText

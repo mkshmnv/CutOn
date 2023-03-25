@@ -7,6 +7,10 @@ android {
     namespace 'com.example.cuton'
     compileSdk 33
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId "com.example.cuton"
         minSdk 21
