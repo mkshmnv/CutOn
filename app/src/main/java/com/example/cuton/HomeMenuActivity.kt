@@ -1,6 +1,7 @@
 package com.example.cuton
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -14,12 +15,19 @@ class HomeMenuActivity : AppCompatActivity() {
         binding = ActivityHomeMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+//        binding.buttonUnion.setBackground(Drawable)
+
         binding.buttonClose.setOnClickListener {
             val intent = Intent(this, LogoutActivity::class.java)
             startActivity(intent)
         }
 
         binding.buttonCatalog.setOnClickListener {
+            val intent = Intent(this, CatalogBrandsActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.buttonUnion.setOnClickListener {
             val intent = Intent(this, CatalogBrandsActivity::class.java)
             startActivity(intent)
         }
