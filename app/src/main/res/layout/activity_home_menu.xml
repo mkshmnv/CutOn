@@ -101,7 +101,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_weight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="25dp"
             android:background="@drawable/home"/>
 
         <Button
@@ -109,7 +109,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_weight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="25dp"
             android:background="@drawable/union" />
 
         <Button
@@ -117,7 +117,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_weight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="25dp"
             android:background="@drawable/coins" />
 
         <Button
@@ -125,7 +125,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_weight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="25dp"
             android:background="@drawable/support"/>
 
         <Button
@@ -133,7 +133,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_weight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="25dp"
             android:background="@drawable/settings" />
 
     </LinearLayout>
