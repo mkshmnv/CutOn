@@ -22,20 +22,24 @@ class AuthorizationScreenActivity : AppCompatActivity() {
         buttonLogin = findViewById(R.id.buttonLogin)
 
         buttonLogin.setOnClickListener {
-            val userPhone = editTextUserPhone.text.toString()
-            val password = editTextPassword.text.toString()
 
-            // Перевірка коректності введених даних
-            if (userPhone.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please enter your username and password", Toast.LENGTH_SHORT).show()
-            } else if (userPhone == "admin" && password == "password") {
-                // Якщо введені дані є вірними, переходимо до наступної активності
-                val intent = Intent(this, AuthorizationScreenActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                Toast.makeText(this, "Incorrect username or password", Toast.LENGTH_SHORT).show()
-            }
+            val intent = Intent(this, HomeMenuActivity::class.java)
+            startActivity(intent)
+
+//            val userPhone = editTextUserPhone.text.toString()
+//            val password = editTextPassword.text.toString()
+//
+//            // Перевірка коректності введених даних
+//            if (userPhone.isEmpty() || password.isEmpty()) {
+//                Toast.makeText(this, "Please enter your username and password", Toast.LENGTH_SHORT).show()
+//            } else if (userPhone == "admin" && password == "password") {
+//                // Якщо введені дані є вірними, переходимо до наступної активності
+//                val intent = Intent(this, AuthorizationScreenActivity::class.java)
+//                startActivity(intent)
+//                finish()
+//            } else {
+//                Toast.makeText(this, "Incorrect username or password", Toast.LENGTH_SHORT).show()
+//            }
         }
     }
 }
