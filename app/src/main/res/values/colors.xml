@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="background_app">#1D1E20</color>
-    <color name="text_main">#999999</color>
-    <color name="text_another">#00CC66</color>
+    <color name="grey">#999999</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="green">#00CC66</color>
     <color name="purple_700">#FF3700B3</color>

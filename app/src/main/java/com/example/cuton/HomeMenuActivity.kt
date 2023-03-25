@@ -15,8 +15,6 @@ class HomeMenuActivity : AppCompatActivity() {
         binding = ActivityHomeMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        binding.buttonUnion.setBackground(Drawable)
-
         binding.buttonClose.setOnClickListener {
             val intent = Intent(this, LogoutActivity::class.java)
             startActivity(intent)
@@ -27,18 +25,10 @@ class HomeMenuActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.buttonUnion.setOnClickListener {
-            val intent = Intent(this, CatalogBrandsActivity::class.java)
-            startActivity(intent)
-        }
-
         binding.buttonProfile.setOnClickListener {
-            Toast.makeText(this, "Функція ще не реалізована", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Функція Profile ще не реалізована", Toast.LENGTH_SHORT).show()
         }
 
     }
-
-
-
 
 }

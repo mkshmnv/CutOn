@@ -68,9 +68,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="23dp"
-            android:text="Menu"
+            android:text="Меню"
             android:textAlignment="textStart"
-            android:textColor="@color/text_main"
+            android:textColor="@color/grey"
             android:textSize="12sp"
             android:textStyle="bold" />
 
@@ -96,48 +96,123 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
 
-        <Button
-            android:id="@+id/buttonHome"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_weight="1"
-            android:layout_margin="25dp"
-            android:background="@drawable/home"
-            android:backgroundTint="@color/text_main"/>
 
-        <Button
-            android:id="@+id/buttonUnion"
+        <LinearLayout
             android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_weight="1"
+            android:layout_height="30dp"
             android:layout_margin="25dp"
-            android:background="@drawable/union" />
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
 
-        <Button
-            android:id="@+id/buttonCoins"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_weight="1"
-            android:layout_margin="25dp"
-            android:background="@drawable/coins" />
+            <View
+                android:id="@+id/viewHome"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/home"
+                android:backgroundTint="@color/green"/>
 
-        <Button
-            android:id="@+id/buttonSupport"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_weight="1"
-            android:layout_margin="25dp"
-            android:background="@drawable/support"/>
+            <View
+                android:layout_width="3dp"
+                android:layout_height="3dp"
+                android:background="@drawable/ellipse"
+                android:backgroundTint="@color/green"
+                android:layout_margin="3dp"/>
 
-        <Button
-            android:id="@+id/buttonSettings"
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_weight="1"
+            android:layout_height="30dp"
             android:layout_margin="25dp"
-            android:background="@drawable/settings" />
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <View
+                android:id="@+id/viewUnion"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/union" />
+
+            <View
+                android:layout_width="3dp"
+                android:layout_height="3dp"
+                android:background="@drawable/ellipse"
+                android:backgroundTint="@android:color/transparent"
+                android:layout_margin="3dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:layout_margin="25dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <View
+                android:id="@+id/viewCoins"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/coins" />
+
+            <View
+                android:layout_width="3dp"
+                android:layout_height="3dp"
+                android:background="@drawable/ellipse"
+                android:backgroundTint="@android:color/transparent"
+                android:layout_margin="3dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:layout_margin="25dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <View
+                android:id="@+id/viewSupport"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/support"/>
+
+            <View
+                android:layout_width="3dp"
+                android:layout_height="3dp"
+                android:background="@drawable/ellipse"
+                android:backgroundTint="@android:color/transparent"
+                android:layout_margin="3dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:layout_margin="25dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <View
+                android:id="@+id/viewSettings"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/settings" />
+
+            <View
+                android:layout_width="3dp"
+                android:layout_height="3dp"
+                android:background="@drawable/ellipse"
+                android:backgroundTint="@android:color/transparent"
+                android:layout_margin="3dp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

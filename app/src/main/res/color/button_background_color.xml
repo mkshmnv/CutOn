@@ -8,6 +8,6 @@
     <!--When Button is in selected state -->
     <item android:state_selected="true" android:color="@color/green" />
     <!--Default Background Color -->
-    <item android:color="@color/text_main" />
+    <item android:color="@color/grey" />
 
 </selector>
