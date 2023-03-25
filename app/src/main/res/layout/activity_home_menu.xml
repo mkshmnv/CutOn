@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayoutBottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +85,7 @@
 
     <!--    Bottom Bar    -->
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/constraintLayoutBottom"
         android:layout_width="360dp"
         android:layout_height="80dp"
         android:background="@drawable/bottom"
@@ -100,7 +100,41 @@
             android:id="@+id/buttonHome"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:background="@drawable/home" />
+            android:layout_weight="1"
+            android:layout_margin="20dp"
+            android:background="@drawable/home"/>
+
+        <Button
+            android:id="@+id/buttonUnion"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:layout_margin="20dp"
+            android:background="@drawable/union" />
+
+        <Button
+            android:id="@+id/buttonCoins"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:layout_margin="20dp"
+            android:background="@drawable/coins" />
+
+        <Button
+            android:id="@+id/buttonSupport"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:layout_margin="20dp"
+            android:background="@drawable/support"/>
+
+        <Button
+            android:id="@+id/buttonSettings"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:layout_margin="20dp"
+            android:background="@drawable/settings" />
 
     </LinearLayout>
 
