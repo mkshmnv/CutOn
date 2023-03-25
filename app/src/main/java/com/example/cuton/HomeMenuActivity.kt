@@ -3,6 +3,7 @@ package com.example.cuton
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.cuton.databinding.ActivityHomeMenuBinding
 
 class HomeMenuActivity : AppCompatActivity() {
@@ -13,12 +14,20 @@ class HomeMenuActivity : AppCompatActivity() {
         binding = ActivityHomeMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         binding.buttonClose.setOnClickListener {
             val intent = Intent(this, LogoutActivity::class.java)
             startActivity(intent)
-            finish()
         }
+
+        binding.buttonCatalog.setOnClickListener {
+            val intent = Intent(this, CatalogBrandsActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.buttonProfile.setOnClickListener {
+            Toast.makeText(this, "Функція ще не реалізована", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
 
