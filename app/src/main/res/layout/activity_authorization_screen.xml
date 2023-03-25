@@ -1,29 +1,35 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_app"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="20dp">
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="97dp"
         android:layout_height="45dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="100dp"
         android:text="Вхід"
         android:textColor="@color/white"
         android:textSize="40sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:hint="Телефон"
         android:inputType="text"
         android:textColorHint="@color/text_main"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="201dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:layout_editor_absoluteX="16dp" />
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -32,66 +38,89 @@
         android:hint="Пароль"
         android:inputType="textPassword"
         android:textColorHint="@color/text_main"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="288dp" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPhone"
+        tools:layout_editor_absoluteX="14dp" />
 
+    <!--    Forgot password    -->
     <LinearLayout
+        android:id="@+id/linearLayoutForgotPassword"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:orientation="horizontal"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/editTextPassword">
 
         <RadioButton
             android:id="@+id/radioButtonRememberMe"
-            android:layout_width="187dp"
-            android:layout_height="37dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="Запам'ятати мене"
-            android:textColor="@color/text_another"
-            tools:layout_editor_absoluteX="-3dp"
-            tools:layout_editor_absoluteY="347dp" />
+            android:textColor="@color/text_another" />
 
         <Button
             android:id="@+id/buttonForgotPassword"
-            android:layout_width="158dp"
-            android:layout_height="37dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="@android:color/transparent"
             android:text="Забули пароль?"
-            android:textAllCaps="false"
-            tools:layout_editor_absoluteX="226dp"
-            tools:layout_editor_absoluteY="347dp" />
-
+            android:textAllCaps="false" />
 
     </LinearLayout>
 
+    <!--    Login    -->
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/linearLayoutForgotPassword"
         android:text="Логін"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        tools:layout_editor_absoluteX="21dp" />
+        android:textAllCaps="false" />
 
+    <!--    Update    -->
+    <TextView
+        android:id="@+id/textViewVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Ця версія додатку застаріла"
+        android:textColor="@color/text_main"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonLogin" />
+    <!--    Update    -->
+    <Button
+        android:id="@+id/buttonVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        android:text="Оновити зараз!"
+        android:textColor="@color/text_another"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewVersion" />
 
-
+    <!--    Bottom Registration    -->
     <LinearLayout
+        android:id="@+id/linearLayoutBottom"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:orientation="horizontal"
-        android:paddingHorizontal="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
             android:id="@+id/textViewSignUp"
-            android:layout_width="124dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="@android:color/transparent"
             android:gravity="center"
             android:text="Немає аккаунту?"
-            android:textAlignment="textEnd"
             android:textAllCaps="false"
             android:textColor="@color/text_main"
             android:textSize="12sp"
@@ -102,13 +131,13 @@
             android:id="@+id/buttonSignUp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="@android:color/transparent"
             android:text="Зареєструватися"
             android:textAllCaps="false"
             android:textSize="12sp"
             android:textStyle="bold" />
 
-
     </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
