@@ -1,10 +1,15 @@
 package com.example.cuton
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 @Suppress("DEPRECATION")
@@ -29,6 +34,6 @@ class InitializeScreenActivity : AppCompatActivity() {
             val intent = Intent(this, AuthorizationScreenActivity::class.java)
             startActivity(intent)
             finish()
-        }, 1500) // 3000 is the delayed time in milliseconds.
+        }, 1500) // This the delayed time in milliseconds.
     }
 }

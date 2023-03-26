@@ -23,13 +23,14 @@ class AuthorizationScreenActivity : AppCompatActivity() {
         setTheme(R.style.Theme_CutOn)
         setContentView(R.layout.activity_authorization_screen)
 
-        binding = ActivityAuthorizationScreenBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
-
         if (!checkForInternet(this)) {
             Toast.makeText(this, "Не вдалося підключитися до мережі інтернет", Toast.LENGTH_SHORT).show()
         }
+
+
+        binding = ActivityAuthorizationScreenBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         binding.buttonLogin.setOnClickListener {
             val intent = Intent(this, HomeMenuActivity::class.java)
@@ -75,6 +76,5 @@ class AuthorizationScreenActivity : AppCompatActivity() {
             return networkInfo.isConnected
         }
     }
-
 }
 
