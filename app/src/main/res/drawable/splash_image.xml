@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--Add the following code
+        add the drawable color to white-->
+    <!-- TODO fix background -->
+    <item android:drawable="@drawable/app_initialize_screen"/>
+    <!--Add the logo that you want to display and its gravity to centre-->
+    <item android:drawable="@drawable/icon" android:gravity="center"/>
+</layer-list>

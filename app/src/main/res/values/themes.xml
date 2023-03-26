@@ -1,4 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--Create a new style and name it splashScreenTheme and add the following code-->
+    <style name="splashScreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_image</item>
+        <item name="android:statusBarColor">@color/black</item>
+    </style>
+
     <!-- Base application theme. -->
     <style name="Theme.CutOn" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
@@ -12,11 +19,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-    </style>
-
-    <style name="yourThemeName" parent="Theme.CutOn">
-        <item name="android:windowBackground">@drawable/app_initialize_screen</item>
-        <item name="android:windowFullscreen">true</item>
     </style>
 
 </resources>
