@@ -9,21 +9,23 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/splashScreenTheme"
+        android:theme="@style/Theme.CutOn"
         tools:targetApi="31">
 
         <activity
-            android:name=".AuthorizationScreenActivity"
+            android:name=".InitializeScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".AuthorizationScreenActivity" />
+        <activity android:name=".HomeMenuActivity" />
         <activity android:name=".CatalogBrandsActivity" />
         <activity android:name=".LogoutActivity" />
-        <activity android:name=".HomeMenuActivity" />
 
     </application>
-
 </manifest>
