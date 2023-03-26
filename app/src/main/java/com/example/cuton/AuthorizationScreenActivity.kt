@@ -18,7 +18,7 @@ class AuthorizationScreenActivity : AppCompatActivity() {
     private val mLauncher: Launcher = Launcher()
     override fun onStart() {
         super.onStart()
-        mHandler.postDelayed(mLauncher, SPLASH_DELAY.toLong())
+        mHandler.postDelayed(mLauncher, 2000.toLong())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,16 +63,10 @@ class AuthorizationScreenActivity : AppCompatActivity() {
 //        }
     }
 
-
     private inner class Launcher : Runnable {
         override fun run() {
             launch()
         }
-    }
-
-    companion object {
-        private const val SPLASH_DELAY = 2000
-        private const val TAG = "MainActivity"
     }
 }
 
