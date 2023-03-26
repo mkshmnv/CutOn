@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cuton.databinding.ActivityInitializeScreenBinding
 
+//TODO fix launch icon
+
 @Suppress("DEPRECATION")
 class InitializeScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInitializeScreenBinding

@@ -13,4 +13,10 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="yourThemeName" parent="Theme.CutOn">
+        <item name="android:windowBackground">@drawable/app_initialize_screen</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>
