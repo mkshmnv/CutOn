@@ -12,8 +12,6 @@ class AuthorizationScreenActivity : AppCompatActivity() {
 
     // TODO set Initialize Screen
 
-    private lateinit var binding: ActivityAuthorizationScreenBinding
-
     private lateinit var editTextUserPhone: EditText
     private lateinit var editTextPassword: EditText
     private lateinit var buttonLogin: Button
