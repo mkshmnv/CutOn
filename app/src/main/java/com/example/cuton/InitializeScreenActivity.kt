@@ -28,96 +28,34 @@ class InitializeScreenActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val appName = "cuton"
-        val v = 36
-        val route: String
+        // #1.2.1
+        Server.newAppName("cuton")
 
-        if (!checkForInternet(this)) {
+        // #1.2.2
+        Server.newVer("36")
+
+        // #1.4
+        if (!Server.checkForInternet(this)) {
             Toast.makeText(this, "Не вдалось підключитись", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(this, "Вдалось підключитись", Toast.LENGTH_SHORT).show()
         }
 
-        route = apiAddressResponse(appName, v)
+        // #1.5
+        Server.getApiAddress()
 
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
+        // #1.6
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this, AuthorizationScreenActivity::class.java)
+
             startActivity(intent)
             finish()
         }, 500) // This the delayed time in milliseconds.
 
-    }
-
-    private fun checkForInternet(context: Context): Boolean {
-
-        // register activity with the connectivity manager service
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-        // if the android version is equal to M
-        // or greater we need to use the
-        // NetworkCapabilities to check what type of
-        // network has the internet connection
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
-            // Returns a Network object corresponding to
-            // the currently active default data network.
-            val network = connectivityManager.activeNetwork ?: return false
-
-            // Representation of the capabilities of an active network.
-            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
-
-            return when {
-                // Indicates this network uses a Wi-Fi transport,
-                // or WiFi has network connectivity
-                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-
-                // Indicates this network uses a Cellular transport. or
-                // Cellular has network connectivity
-                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-
-                // else return false
-                else -> false
-            }
-        } else {
-            // if the android version is below M
-            @Suppress("DEPRECATION")
-            val networkInfo = connectivityManager.activeNetworkInfo ?: return false
-            @Suppress("DEPRECATION")
-            return networkInfo.isConnected
-        }
-    }
-
-    private fun apiAddressResponse(name: String, ver: Int): String {
-        var apiResponse = "Request failed"
-
-        val client = OkHttpClient()
-
-        val request = Request.Builder()
-            .url("https://cr-test-ribu2uaqea-ey.a.run.app/routes/?appName=$name&v=$ver")
-            .build()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                e.printStackTrace()
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-
-                response.use {
-                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
-
-                    apiResponse =
-                        Gson().fromJson(response.body!!.string(), JsonRequest::class.java).route
-                }
-            }
-        })
-
-        return apiResponse
     }
 }
