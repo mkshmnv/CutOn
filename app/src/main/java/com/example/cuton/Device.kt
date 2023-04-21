@@ -1,6 +1,7 @@
 package com.example.cuton
 
 class Device {
+
     private lateinit var devman : String
     private lateinit var devmod : String
     private lateinit var devavs : String
