@@ -20,7 +20,6 @@ class LogoutActivity : AppCompatActivity() {
             // TODO при натисканні на кнопку ТАК підключитися до API api_address/users/
             // - DELETE-параметри запиту: ?token=token
             // - отримати JSON: {"answer":int}
-            // закрити додаток
             finishAffinity()
         }
 
