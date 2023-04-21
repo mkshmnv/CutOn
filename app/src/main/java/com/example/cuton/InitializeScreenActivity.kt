@@ -1,6 +1,5 @@
 package com.example.cuton
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
@@ -13,10 +12,9 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cuton.databinding.ActivityInitializeScreenBinding
+import com.google.gson.Gson
 import okhttp3.*
 import okio.IOException
-import java.net.HttpURLConnection
-import java.net.URL
 
 @Suppress("DEPRECATION")
 class InitializeScreenActivity : AppCompatActivity() {
@@ -32,7 +30,7 @@ class InitializeScreenActivity : AppCompatActivity() {
 
         val appName = "cuton"
         val v = 36
-        val apiAddress: String
+        val route: String
 
         if (!checkForInternet(this)) {
             Toast.makeText(this, "Не вдалось підключитись", Toast.LENGTH_SHORT).show()
@@ -40,7 +38,7 @@ class InitializeScreenActivity : AppCompatActivity() {
             Toast.makeText(this, "Вдалось підключитись", Toast.LENGTH_SHORT).show()
         }
 
-        apiAddress = fetchCurrencyData(appName, v)
+        route = apiAddressResponse(appName, v)
 
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -51,7 +49,7 @@ class InitializeScreenActivity : AppCompatActivity() {
             val intent = Intent(this, AuthorizationScreenActivity::class.java)
             startActivity(intent)
             finish()
-        }, 1500) // This the delayed time in milliseconds.
+        }, 500) // This the delayed time in milliseconds.
 
     }
 
@@ -88,15 +86,18 @@ class InitializeScreenActivity : AppCompatActivity() {
             }
         } else {
             // if the android version is below M
-            @Suppress("DEPRECATION") val networkInfo =
-                connectivityManager.activeNetworkInfo ?: return false
+            @Suppress("DEPRECATION")
+            val networkInfo = connectivityManager.activeNetworkInfo ?: return false
             @Suppress("DEPRECATION")
             return networkInfo.isConnected
         }
     }
 
-    private fun fetchCurrencyData(name: String, ver: Int) : String {
+    private fun apiAddressResponse(name: String, ver: Int): String {
+        var apiResponse = "Request failed"
+
         val client = OkHttpClient()
+
         val request = Request.Builder()
             .url("https://cr-test-ribu2uaqea-ey.a.run.app/routes/?appName=$name&v=$ver")
             .build()
@@ -111,15 +112,12 @@ class InitializeScreenActivity : AppCompatActivity() {
                 response.use {
                     if (!response.isSuccessful) throw IOException("Unexpected code $response")
 
-//                    for ((name, value) in response.headers) {
-//                        println("$name: $value")
-//                    }
-
-                    println(response.body!!.string())
+                    apiResponse =
+                        Gson().fromJson(response.body!!.string(), JsonRequest::class.java).route
                 }
             }
         })
 
-        return "route from API"
+        return apiResponse
     }
 }
