@@ -5,23 +5,37 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import com.google.gson.Gson
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import okhttp3.*
 import okio.IOException
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
 
 object Server {
 
-    private lateinit var appName : String
-    private lateinit var v : String
+    private lateinit var appName: String
+    private lateinit var v: String
 
     private lateinit var apiAddress: String
+    var answer1: Int = 0
 
-    fun newAppName(appName: String) {
+    fun setAppName(appName: String) {
         this.appName = appName
     }
 
-    fun newVer(v: String) {
+    fun getAppName() = appName
+
+    fun setVer(v: String) {
         this.v = v
     }
+
+    fun getVer() = v
 
     fun checkForInternet(context: Context): Boolean {
 
@@ -63,63 +77,131 @@ object Server {
         }
     }
 
-    fun getApiAddress() {
+    fun setApiAddress(api: String) {
+        apiAddress = api
+    }
 
-        val client = OkHttpClient()
+    fun getApiAddress() = apiAddress
 
-        val request = Request.Builder()
-            .url("https://cr-test-ribu2uaqea-ey.a.run.app/routes/?appName=$appName&v=$v")
-            .build()
+    fun testRoute() {
+        runBlocking { // this: CoroutineScope
+            launch { // launch a new coroutine and continue
+                async {
+                    val url = URL(
+                        "https://cr-test-ribu2uaqea-ey.a.run.app/routes/?appName=$appName&v=$v"
+                    )
+                    val connection = url.openConnection() as HttpURLConnection
+                    val inputSystem = connection.inputStream
+                    val inputStreamReader = InputStreamReader(inputSystem, "UTF-8")
 
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                e.printStackTrace()
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-
-                response.use {
-                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
-
-                    apiAddress = Gson().fromJson(response.body!!.string(), object {
+                    apiAddress = Gson().fromJson(inputStreamReader, object {
                         val route: String = ""
-                    }::class.java
-                    ).route
-                }
+                    }::class.java).route
+
+                    inputStreamReader.close()
+                    inputSystem.close()
+
+                    println("--------------!!!apiAddress!!!--------------->>>>>>>>>>>>>>>>> ${Server.getApiAddress()}")
+                }.await()
             }
-        })
+        }
     }
 
-    fun checkLatestVersion(): Int {
-        var answer = 0
+    fun testAnswer() : Int {
+        var answ = 0
+        runBlocking { // this: CoroutineScope
+            launch { // launch a new coroutine and continue
+                async {
+                    val url = URL("${apiAddress}app/version/latest/?v=$v")
+                    val connection = url.openConnection() as HttpURLConnection
+                    val inputSystem = connection.inputStream
+                    val inputStreamReader = InputStreamReader(inputSystem, "UTF-8")
 
-        val client = OkHttpClient()
-
-        val request = Request.Builder()
-            .url("${apiAddress}app/version/latest/?v=$v")
-            .build()
-
-        // TODO fix answer = 0
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                e.printStackTrace()
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-
-                response.use {
-                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
-
-                    answer = Gson().fromJson(response.body!!.string(), object {
+                    answ = Gson().fromJson(inputStreamReader, object {
                         val answer: Int = 0
-                    }::class.java
-                    ).answer
-                }
-            }
-        })
+                    }::class.java).answer
 
-        return answer
+                    inputStreamReader.close()
+                    inputSystem.close()
+
+                    println(" ---->>>> version ->>>>>> $answ")
+                }.await()
+            }
+        }
+        return answ
     }
+
+//
+//    private fun getTest() {
+//
+//        val client = OkHttpClient.Builder().build()
+//
+//        val retrofit = Retrofit.Builder()
+//            .baseUrl("https://cr-test-ribu2uaqea-ey.a.run.app/routes/?appName=$appName&v=$v")
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .client(client)
+//            .build()
+//
+//        fun <T> buildService(service: Class<T>): T {
+//            return retrofit.create(service)
+//        }
+//
+//        val request = Request.Builder()
+//            .url("https://cr-test-ribu2uaqea-ey.a.run.app/routes/?appName=$appName&v=$v")
+//            .build()
+//
+//        client.newCall(request).enqueue(object : Callback {
+//            override fun onFailure(call: Call, e: IOException) {
+//                e.printStackTrace()
+//            }
+//
+//            override fun onResponse(call: Call, response: Response) {
+//
+//                response.use {
+//                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
+//
+//                    answer1 = Gson().fromJson(
+//                        response.body!!.string(), object {
+//                            val answ: Int = 0
+//                        }::class.java
+//                    ).answ
+//                }
+//
+//                answer1
+//            }
+//        })
+//    }
+//
+//    fun checkLatestVersion() {
+//
+//
+//        val client = OkHttpClient()
+//
+//        val request = Request.Builder()
+//            .url("${apiAddress}app/version/latest/?v=$v")
+//            .build()
+//
+//        // TODO fix answer = 0
+//
+//        client.newCall(request).enqueue(object : Callback {
+//            override fun onFailure(call: Call, e: IOException) {
+//                e.printStackTrace()
+//            }
+//
+//            override fun onResponse(call: Call, response: Response) {
+//
+//                response.use {
+//                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
+//
+//                    answer1 = Gson().fromJson(
+//                        response.body!!.string(), object {
+//                            val answer: Int = 0
+//                        }::class.java
+//                    ).answer
+//                }
+//            }
+//        })
+//        answer1
+//    }
 
 }

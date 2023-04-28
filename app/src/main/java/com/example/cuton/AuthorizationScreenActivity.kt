@@ -6,6 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.cuton.databinding.ActivityAuthorizationScreenBinding
+import com.google.gson.Gson
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
 
 class AuthorizationScreenActivity : AppCompatActivity() {
 
@@ -30,11 +34,11 @@ class AuthorizationScreenActivity : AppCompatActivity() {
         Device.newDevaid(Build.ID)
 
         // #2.2
-        val stateVersion = Server.checkLatestVersion()
-        println(" ---->>>> version ->>>>>> $stateVersion")
+
+        val answer = 0 //Server.testAnswer()
 
         // #2.2.2
-        when (stateVersion) {
+        when (answer) {
             2 -> {
                 Toast.makeText(
                     this,
@@ -46,6 +50,13 @@ class AuthorizationScreenActivity : AppCompatActivity() {
                 Toast.makeText(
                     this,
                     "Є нова версія додатку",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            else -> {
+                Toast.makeText(
+                    this,
+                    "ПОМИЛКА - answer is ${Server.answer1}",
                     Toast.LENGTH_SHORT
                 ).show()
             }

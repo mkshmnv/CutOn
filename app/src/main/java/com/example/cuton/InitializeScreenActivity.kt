@@ -1,10 +1,6 @@
 package com.example.cuton
 
-import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -13,8 +9,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cuton.databinding.ActivityInitializeScreenBinding
 import com.google.gson.Gson
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import okhttp3.*
-import okio.IOException
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
 
 @Suppress("DEPRECATION")
 class InitializeScreenActivity : AppCompatActivity() {
@@ -29,20 +31,23 @@ class InitializeScreenActivity : AppCompatActivity() {
         setContentView(view)
 
         // #1.2.1
-        Server.newAppName("cuton")
+        Server.setAppName("cuton")
 
         // #1.2.2
-        Server.newVer("36")
+        Server.setVer("36")
 
         // #1.4
         if (!Server.checkForInternet(this)) {
-            Toast.makeText(this, "Не вдалось підключитись", Toast.LENGTH_SHORT).show()
+            println("<<<<<<<<<<< Помилка підключення >>>>>>>>>>>>>>>")
+            Toast.makeText(this, "Помилка підключення", Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(this, "Вдалось підключитись", Toast.LENGTH_SHORT).show()
+            println("<<<<<<<<<<< Успішне підключення >>>>>>>>>>>>>>>")
+            Toast.makeText(this, "Успішне підключення", Toast.LENGTH_SHORT).show()
         }
 
         // #1.5
-        Server.getApiAddress()
+        Server.testRoute()
+
 
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
