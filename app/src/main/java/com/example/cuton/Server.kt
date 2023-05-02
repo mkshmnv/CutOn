@@ -5,8 +5,6 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import com.google.gson.Gson
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -22,8 +20,6 @@ object Server {
 
     private lateinit var apiAddress: String
 
-    var answer1: Int = 0
-
     fun setAppName(appName: String) {
         this.appName = appName
     }
@@ -34,7 +30,7 @@ object Server {
         this.v = v
     }
 
-    fun getVer() = v
+    fun getV() = v
 
     fun checkForInternet(context: Context): Boolean {
 
