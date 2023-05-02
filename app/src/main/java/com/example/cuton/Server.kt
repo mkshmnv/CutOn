@@ -5,14 +5,12 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import okhttp3.*
-import okio.IOException
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
@@ -23,6 +21,7 @@ object Server {
     private lateinit var v: String
 
     private lateinit var apiAddress: String
+
     var answer1: Int = 0
 
     fun setAppName(appName: String) {
@@ -31,7 +30,7 @@ object Server {
 
     fun getAppName() = appName
 
-    fun setVer(v: String) {
+    fun setV(v: String) {
         this.v = v
     }
 
@@ -82,30 +81,6 @@ object Server {
     }
 
     fun getApiAddress() = apiAddress
-
-    fun testRoute() {
-        runBlocking { // this: CoroutineScope
-            launch { // launch a new coroutine and continue
-                async {
-                    val url = URL(
-                        "https://cr-test-ribu2uaqea-ey.a.run.app/routes/?appName=$appName&v=$v"
-                    )
-                    val connection = url.openConnection() as HttpURLConnection
-                    val inputSystem = connection.inputStream
-                    val inputStreamReader = InputStreamReader(inputSystem, "UTF-8")
-
-                    apiAddress = Gson().fromJson(inputStreamReader, object {
-                        val route: String = ""
-                    }::class.java).route
-
-                    inputStreamReader.close()
-                    inputSystem.close()
-
-                    println("--------------!!!apiAddress!!!--------------->>>>>>>>>>>>>>>>> ${Server.getApiAddress()}")
-                }.await()
-            }
-        }
-    }
 
     fun testAnswer() : Int {
         var answ = 0

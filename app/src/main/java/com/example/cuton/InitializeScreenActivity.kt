@@ -4,15 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cuton.databinding.ActivityInitializeScreenBinding
 import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import okhttp3.*
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
@@ -34,7 +35,7 @@ class InitializeScreenActivity : AppCompatActivity() {
         Server.setAppName("cuton")
 
         // #1.2.2
-        Server.setVer("36")
+        Server.setV("36")
 
         // #1.4
         if (!Server.checkForInternet(this)) {
@@ -46,8 +47,27 @@ class InitializeScreenActivity : AppCompatActivity() {
         }
 
         // #1.5
-        Server.testRoute()
+        CoroutineScope(Dispatchers.IO).launch {
+            var result = ""
+            async {
+                val url = URL(
+                    "https://cr-test-ribu2uaqea-ey.a.run.app/routes/?appName=${Server.getAppName()}&v=${Server.getVer()}"
+                )
+                val connection = url.openConnection() as HttpURLConnection
+                val inputSystem = connection.inputStream
+                val inputStreamReader = InputStreamReader(inputSystem, "UTF-8")
 
+                result = Gson().fromJson(inputStreamReader, object {
+                    val route: String = ""
+                }::class.java).route
+
+                inputStreamReader.close()
+                inputSystem.close()
+                Log.e("points", "apiAddress > $result")
+            }.await()
+
+            Server.setApiAddress(result)
+        }
 
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
