@@ -7,25 +7,25 @@ object Device {
     private lateinit var devavs : String
     private lateinit var devaid : String
 
-    fun newDevman(devman: String) {
+    fun setDevman(devman: String) {
         this.devman = devman
     }
 
     fun getDevman() = devman
 
-    fun newDevmod(devmod: String) {
+    fun setDevmod(devmod: String) {
         this.devmod = devmod
     }
 
     fun getDevmod() = devmod
 
-    fun newDevavs(devavs: String) {
+    fun setDevavs(devavs: String) {
         this.devavs = devavs
     }
 
     fun getDevavs() = devavs
 
-    fun newDevaid(devaid: String) {
+    fun setDevaid(devaid: String) {
         this.devaid = devaid
     }
 

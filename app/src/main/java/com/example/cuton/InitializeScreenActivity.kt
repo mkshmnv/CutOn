@@ -19,11 +19,10 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 
-const val TAGi = "points-Initialize"
-
-
 @Suppress("DEPRECATION")
 class InitializeScreenActivity : AppCompatActivity() {
+
+    val tag = "points-Initialize"
 
     private lateinit var binding: ActivityInitializeScreenBinding
 
@@ -59,6 +58,7 @@ class InitializeScreenActivity : AppCompatActivity() {
                 val connection = url.openConnection() as HttpURLConnection
                 val inputSystem = connection.inputStream
                 val inputStreamReader = InputStreamReader(inputSystem, "UTF-8")
+                Log.e(tag, "responseCode -> ${connection.responseCode}")
 
                 response = Gson().fromJson(inputStreamReader, object {
                     val route: String = ""
@@ -66,16 +66,11 @@ class InitializeScreenActivity : AppCompatActivity() {
 
                 inputStreamReader.close()
                 inputSystem.close()
-                Log.e(TAGi, "apiAddress > $response")
+                Log.e(tag, "apiAddress -> $response")
             }.await()
 
             Server.setApiAddress(response)
         }
-
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
 
         // #1.6
         Handler(Looper.getMainLooper()).postDelayed({

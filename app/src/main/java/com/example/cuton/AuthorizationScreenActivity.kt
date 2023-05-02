@@ -1,6 +1,5 @@
 package com.example.cuton
 
-import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,9 +12,11 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 
-const val TAGa = "points-Authorization"
+
 
 class AuthorizationScreenActivity : AppCompatActivity() {
+
+    val tag = "points-Authorization"
 
     private lateinit var binding: ActivityAuthorizationScreenBinding
 
@@ -32,10 +33,10 @@ class AuthorizationScreenActivity : AppCompatActivity() {
         setContentView(R.layout.activity_authorization_screen)
 
         //#2.1
-        Device.newDevman(Build.MANUFACTURER)
-        Device.newDevmod(Build.MODEL)
-        Device.newDevavs(Build.VERSION.RELEASE)
-        Device.newDevaid(Build.ID)
+        Device.setDevman(Build.MANUFACTURER)
+        Device.setDevmod(Build.MODEL)
+        Device.setDevavs(Build.VERSION.RELEASE)
+        Device.setDevaid(Build.ID)
 
         // #2.2
         var answer = 0
@@ -43,10 +44,11 @@ class AuthorizationScreenActivity : AppCompatActivity() {
             // #2.2.1
             async {
                 val url = URL("${Server.getApiAddress()}app/version/latest/?v=${Server.getV()}")
-                Log.e(TAGa, "${Server.getApiAddress()}app/version/latest/?v=${Server.getV()}")
+                Log.e(tag, "request -> ${Server.getApiAddress()}app/version/latest/?v=${Server.getV()}")
                 val connection = url.openConnection() as HttpURLConnection
                 val inputSystem = connection.inputStream
                 val inputStreamReader = InputStreamReader(inputSystem, "UTF-8")
+                Log.e(tag, "responseCode -> ${connection.responseCode}")
 
                 answer = Gson().fromJson(inputStreamReader, object {
                     val answer: Int = 0
@@ -55,7 +57,7 @@ class AuthorizationScreenActivity : AppCompatActivity() {
                 inputStreamReader.close()
                 inputSystem.close()
 
-                Log.e(TAGa, "answer - $answer")
+                Log.e(tag, "response answer -> $answer")
             }.await()
 
             // #2.2.2
@@ -67,11 +69,6 @@ class AuthorizationScreenActivity : AppCompatActivity() {
                             "Версія додатку занадто застаріла, без оновлення авторизація не можлива",
                             Toast.LENGTH_SHORT
                         ).show()
-
-                        Log.e(
-                            TAGa,
-                            "Версія додатку занадто застаріла, без оновлення авторизація не можлива"
-                        )
                     }
                     1 -> {
                         Toast.makeText(
@@ -79,8 +76,6 @@ class AuthorizationScreenActivity : AppCompatActivity() {
                             "Є нова версія додатку",
                             Toast.LENGTH_SHORT
                         ).show()
-
-                        Log.e(TAGa, "Є нова версія додатку")
                     }
                     else -> {
                         Toast.makeText(
@@ -88,8 +83,6 @@ class AuthorizationScreenActivity : AppCompatActivity() {
                             "ПОМИЛКА - answer is $answer",
                             Toast.LENGTH_SHORT
                         ).show()
-
-                        Log.e(TAGa, "ПОМИЛКА - answer is $answer")
                     }
                 }
             }
