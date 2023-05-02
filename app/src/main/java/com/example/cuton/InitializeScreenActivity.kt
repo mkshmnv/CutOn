@@ -19,7 +19,7 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 
-const val TAGi = "points-InitializeScreen"
+const val TAGi = "points-Initialize"
 
 
 @Suppress("DEPRECATION")
