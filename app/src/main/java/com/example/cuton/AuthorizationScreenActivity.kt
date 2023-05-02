@@ -39,8 +39,8 @@ class AuthorizationScreenActivity : AppCompatActivity() {
         Device.setDevaid(Build.ID)
 
         // #2.2
-        var answer = 0
         CoroutineScope(Dispatchers.IO).launch {
+            var answer = 0
             // #2.2.1
             async {
                 val url = URL("${Server.getApiAddress()}app/version/latest/?v=${Server.getV()}")
