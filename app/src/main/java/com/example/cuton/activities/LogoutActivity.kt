@@ -1,4 +1,4 @@
-package com.example.cuton
+package com.example.cuton.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

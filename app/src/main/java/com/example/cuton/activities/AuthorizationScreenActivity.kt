@@ -1,13 +1,22 @@
-package com.example.cuton
+package com.example.cuton.activities
 
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.example.cuton.Device
+import com.example.cuton.R
+import com.example.cuton.Server
 import com.example.cuton.databinding.ActivityAuthorizationScreenBinding
+import com.example.cuton.network.ApiService
+import com.example.cuton.network.ServiceGenerator
+import com.example.cuton.network.VersionModel
 import com.google.gson.Gson
 import kotlinx.coroutines.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
@@ -39,6 +48,23 @@ class AuthorizationScreenActivity : AppCompatActivity() {
         Device.setDevaid(Build.ID)
 
         // #2.2
+
+        val serviceGenerator = ServiceGenerator.buildService(ApiService::class.java)
+        val call = serviceGenerator.getLatestVersion("36")
+
+        call.enqueue(object : Callback<VersionModel> {
+            override fun onResponse(call: Call<VersionModel>, response: Response<VersionModel>) {
+                if (response.isSuccessful) {
+                    Log.e("point #2.2", response.body().toString())
+                }
+            }
+
+            override fun onFailure(call: Call<VersionModel>, t: Throwable) {
+                t.printStackTrace()
+                Log.e("point #2.2", t.message.toString())
+            }
+        })
+
         CoroutineScope(Dispatchers.IO).launch {
             var answer = 0
             // #2.2.1
