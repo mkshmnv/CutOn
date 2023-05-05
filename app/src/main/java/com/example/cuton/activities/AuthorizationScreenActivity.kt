@@ -1,14 +1,17 @@
 package com.example.cuton.activities
 
+import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.example.cuton.Device
 import com.example.cuton.R
 import com.example.cuton.databinding.ActivityAuthorizationScreenBinding
 import com.example.cuton.network.ApiService
 import com.example.cuton.network.ServiceGenerator
+import com.example.cuton.network.TokenModel
 import com.example.cuton.network.VersionModel
 import okio.IOException
 import retrofit2.Call
@@ -44,7 +47,19 @@ class AuthorizationScreenActivity : AppCompatActivity() {
         call.enqueue(object : Callback<VersionModel> {
             override fun onResponse(call: Call<VersionModel>, response: Response<VersionModel>) {
                 if (!response.isSuccessful) throw IOException("Unexpected code $response")
-                Log.e("point #2.2", response.body().toString())
+
+                val answer = response.body()!!.answer!!
+
+                Log.e("point #2.2", answer)
+
+                when (answer.toInt()) {
+                    2 -> updateToast(
+                        "Версія додатку занадто застаріла, авторизація без оновлення не можлива",
+                        this@AuthorizationScreenActivity
+                    )
+                    1 -> updateToast("Доступна нова версія додатку", this@AuthorizationScreenActivity)
+                    else -> updateToast("Помилка запиту версії", this@AuthorizationScreenActivity)
+                }
             }
 
             override fun onFailure(call: Call<VersionModel>, t: Throwable) {
@@ -55,10 +70,42 @@ class AuthorizationScreenActivity : AppCompatActivity() {
 
         // #2.3
         binding.buttonLogin.setOnClickListener {
+            val serviceGenerator = ServiceGenerator.buildService(ApiService::class.java)
+            val call = serviceGenerator.getToken(
+                binding.editTextLogin.text.toString(),
+                binding.editTextPassword.text.toString(),
+                Device.getDevman(),
+                Device.getDevmod(),
+                Device.getDevavs(),
+                Device.getDevaid()
+            )
+
+            call.enqueue(object : Callback<TokenModel> {
+                override fun onResponse(call: Call<TokenModel>, response: Response<TokenModel>) {
+                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
+                    Log.e("point #2.3", response.body().toString())
+                }
+
+                override fun onFailure(call: Call<TokenModel>, t: Throwable) {
+                    t.printStackTrace()
+                    Log.e("point #2.3", t.message.toString())
+                }
+            })
+
             Log.e("point #2.3", "TODO send POST request")
         }
 
 
     }
+}
+
+private fun updateToast(mes: String, context: Context) {
+    Toast.makeText(
+        context,
+        mes,
+        Toast.LENGTH_SHORT
+    ).show()
+
+    Log.e("point #2.2", mes)
 }
 

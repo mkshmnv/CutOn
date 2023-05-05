@@ -11,16 +11,23 @@ object Device {
         this.devman = devman
     }
 
+    fun getDevman() = devman
+
     fun setDevmod(devmod: String) {
         this.devmod = devmod
     }
+
+    fun getDevmod() = devmod
+
     fun setDevavs(devavs: String) {
         this.devavs = devavs
     }
+
+    fun getDevavs() = devavs
 
     fun setDevaid(devaid: String) {
         this.devaid = devaid
     }
 
-    fun postBody() = "devman=$devman&devmod=$devmod&devavs=$devavs&devaid=$devaid"
+    fun getDevaid() = devaid
 }

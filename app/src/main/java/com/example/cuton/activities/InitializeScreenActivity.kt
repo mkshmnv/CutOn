@@ -58,8 +58,11 @@ class InitializeScreenActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<ApiAddressModel>, response: Response<ApiAddressModel>) {
                 if (!response.isSuccessful) throw IOException("Unexpected code $response")
+
                 val route = response.body()?.route!!
+
                 ServiceGenerator.changeApiBaseUrl(route)
+
                 Log.e("point #1.5", route)
             }
 

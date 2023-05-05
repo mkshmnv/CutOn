@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextPhone"
+        android:id="@+id/editTextLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -39,7 +39,7 @@
         android:hint="123456"
         android:inputType="textPassword"
         android:textColorHint="@color/grey"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPhone"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLogin"
         tools:layout_editor_absoluteX="14dp" />
 
     <!--    Forgot password    -->

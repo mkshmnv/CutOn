@@ -1,9 +1,11 @@
 package com.example.cuton.network
 
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
+
 
 interface ApiService {
 
@@ -18,9 +20,14 @@ interface ApiService {
         @Query("v") v: String
     ) : Call<VersionModel>
 
-    @POST("")
+    @POST("users/login/")
     fun getToken(
-
-    ) : Call<VersionModel>
+        @Body login: String,
+        @Body password: String,
+        @Body devman: String,
+        @Body devmod: String,
+        @Body devavs: String,
+        @Body devaid: String
+    ) : Call<TokenModel>
 
 }
