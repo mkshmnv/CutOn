@@ -70,14 +70,13 @@ class AuthorizationScreenActivity : AppCompatActivity() {
 
         // #2.3
         binding.buttonLogin.setOnClickListener {
-            val serviceGenerator = ServiceGenerator.buildService(ApiService::class.java)
             val call = serviceGenerator.getToken(
-                binding.editTextLogin.text.toString(),
-                binding.editTextPassword.text.toString(),
-                Device.getDevman(),
-                Device.getDevmod(),
-                Device.getDevavs(),
-                Device.getDevaid()
+                "380501234567"//,
+//                "123456",
+//                "Xiaomi",
+//                "RedmiNote",
+//                "Q",
+//                "31"
             )
 
             call.enqueue(object : Callback<TokenModel> {
