@@ -14,12 +14,13 @@ interface ApiService {
     ) : Call<ApiAddressModel>
 
     @GET("app/version/latest/")
-    fun getLatestVersion(
+    fun getAnswer(
         @Query("v") v: String
     ) : Call<VersionModel>
 
-    // TODO post request
-    @POST()
-    fun asd()
+    @POST("")
+    fun getToken(
+
+    ) : Call<VersionModel>
 
 }

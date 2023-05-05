@@ -13,17 +13,11 @@ import com.example.cuton.network.ApiAddressModel
 import com.example.cuton.network.ApiService
 import com.example.cuton.network.ServiceGenerator
 import com.google.gson.Gson
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 import okhttp3.*
+import okio.IOException
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.URL
 
 @Suppress("DEPRECATION")
 class InitializeScreenActivity : AppCompatActivity() {
@@ -47,10 +41,10 @@ class InitializeScreenActivity : AppCompatActivity() {
 
         // #1.4
         if (!Server.checkForInternet(this)) {
-            Log.e("point 1.4", "Помилка підключення ")
+            Log.e("point #1.4", "Помилка підключення ")
             Toast.makeText(this, "Помилка підключення", Toast.LENGTH_SHORT).show()
         } else {
-            Log.e("point 1.4", "Успішне підключення ")
+            Log.e("point #1.4", "Успішне підключення ")
             Toast.makeText(this, "Успішне підключення", Toast.LENGTH_SHORT).show()
         }
 
@@ -61,26 +55,26 @@ class InitializeScreenActivity : AppCompatActivity() {
             "36")
 
         call.enqueue(object : Callback<ApiAddressModel> {
+
             override fun onResponse(call: Call<ApiAddressModel>, response: Response<ApiAddressModel>) {
-                if (response.isSuccessful) {
-                    val route = response.body()?.route!!
-                    ServiceGenerator.changeApiBaseUrl(route)
-                    Log.e("point 1.5", route)
-                }
+                if (!response.isSuccessful) throw IOException("Unexpected code $response")
+                val route = response.body()?.route!!
+                ServiceGenerator.changeApiBaseUrl(route)
+                Log.e("point #1.5", route)
             }
 
             override fun onFailure(call: Call<ApiAddressModel>, t: Throwable) {
                 t.printStackTrace()
-                Log.e("point 1.5", t.message.toString())
+                Log.e("point #1.5", t.message.toString())
             }
         })
 
         // #1.6
-//        Handler(Looper.getMainLooper()).postDelayed({
-//            val intent = Intent(this, AuthorizationScreenActivity::class.java)
-//
-//            startActivity(intent)
-//            finish()
-//        }, 500) // This the delayed time in milliseconds.
+        Handler(Looper.getMainLooper()).postDelayed({
+            val intent = Intent(this, AuthorizationScreenActivity::class.java)
+
+            startActivity(intent)
+            finish()
+        }, 500) // This the delayed time in milliseconds.
     }
 }
