@@ -60,7 +60,7 @@ class InitializeScreenActivity : AppCompatActivity() {
         val getRequest = "?appName=${NetworkObject.getAppName()}&v=${NetworkObject.getV()}"
         Log.i(
             "point #1.5.1",
-            "GET-параметри запиту: $getRequest. Повний запит ${NetworkObject.getApiAddress()}$getRequest"
+            "GET-параметри запиту: $getRequest. Повний запит ${ServiceGenerator.getApiAddress()}$getRequest"
         )
 
         call.enqueue(object : Callback<ApiAddressModel> {

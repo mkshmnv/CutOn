@@ -11,7 +11,6 @@ object NetworkObject {
 
     private lateinit var appName: String
     private lateinit var v: String
-    private var apiAddress = "https://cr-test-ribu2uaqea-ey.a.run.app/"
 
     fun setAppName(appName: String) {
         NetworkObject.appName = appName
@@ -27,9 +26,4 @@ object NetworkObject {
 
     fun getV() = v
 
-    fun setApiAddress(api: String) {
-        apiAddress = api
-    }
-
-    fun getApiAddress() = apiAddress
 }
