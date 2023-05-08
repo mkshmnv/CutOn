@@ -35,10 +35,10 @@ class AuthorizationScreenActivity : AppCompatActivity() {
         setTheme(R.style.Theme_CutOn)
 
         //#2.1
-        Device.setDevman(Build.MANUFACTURER)
-        Device.setDevmod(Build.MODEL)
-        Device.setDevavs(Build.VERSION.RELEASE)
-        Device.setDevaid(Build.ID)
+//        Device.setDevman(Build.MANUFACTURER)
+//        Device.setDevmod(Build.MODEL)
+//        Device.setDevavs(Build.VERSION.RELEASE)
+//        Device.setDevaid(Build.ID)
 
         // #2.2
         val serviceGenerator = ServiceGenerator.buildService(ApiService::class.java)
@@ -71,12 +71,12 @@ class AuthorizationScreenActivity : AppCompatActivity() {
         // #2.3
         binding.buttonLogin.setOnClickListener {
             val call = serviceGenerator.getToken(
-                "380501234567"//,
-//                "123456",
-//                "Xiaomi",
-//                "RedmiNote",
-//                "Q",
-//                "31"
+                "380501234567",
+                "123456",
+                "Xiaomi",
+                "RedmiNote",
+                "Q",
+                "31"
             )
 
             call.enqueue(object : Callback<TokenModel> {
@@ -96,6 +96,15 @@ class AuthorizationScreenActivity : AppCompatActivity() {
 
 
     }
+
+    companion object {
+        //#2.1
+        private var devman = Build.MANUFACTURER
+        private var devmod = Build.MODEL
+        private var devavs = Build.VERSION.RELEASE
+        private var devaid = Build.ID
+
+    }
 }
 
 private fun updateToast(mes: String, context: Context) {
@@ -107,4 +116,6 @@ private fun updateToast(mes: String, context: Context) {
 
     Log.e("point #2.2", mes)
 }
+
+
 

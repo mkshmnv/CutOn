@@ -1,6 +1,5 @@
 package com.example.cuton.network
 
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -25,8 +24,12 @@ interface ApiService {
     fun getToken(
 // TODO crete POST request
         @Body
-        login: String
-
+        login: String,
+        password: String,
+        devman: String,
+        devmod: String,
+        devavs: String,
+        devaid: String
 //        @Query(value = "login", encoded = true) login: String?,
 //        @Query(value = "password", encoded = true) password: String?,
 //        @Query(value = "devman", encoded = true) devman: String?,
