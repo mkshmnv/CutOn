@@ -35,8 +35,8 @@ class AuthorizationScreenActivity : AppCompatActivity() {
         // add the default theme
         setTheme(R.style.Theme_CutOn)
 
-//        login = binding.editTextLogin.text.toString()
-//        password = binding.editTextPassword.text.toString()
+        login = "380501234567" // binding.editTextLogin.text.toString()
+        password = "123456" // binding.editTextPassword.text.toString()
 
         // #2.2
         Log.i(
@@ -114,42 +114,49 @@ class AuthorizationScreenActivity : AppCompatActivity() {
         })
 
         binding.buttonLogin.setOnClickListener {
-
             Log.i("point #2.3", "Кнопка Логін натиснута")
-            Log.i(
-                "point #2.3",
-                "Підключаємось до API ${ServiceGenerator.getApiAddress()}users/login/"
-            )
+            if (login == "380501234567" && password == "123456") {
+                Log.i(
+                    "point #2.3",
+                    "Підключаємось до API ${ServiceGenerator.getApiAddress()}users/login/"
+                )
 
-            val call = serviceGenerator.token(
-                login,
-                password,
-                devman,
-                devmod,
-                devavs,
-                devaid
-            )
+                val call = serviceGenerator.token(
+                    login,
+                    password,
+                    devman,
+                    devmod,
+                    devavs,
+                    devaid
+                )
 
-            Log.i("point #2.3", "Відправлений post запит: ${call.request()}")
+                Log.i("point #2.3", "Відправлений post запит: ${call.request()}")
 
-            call.enqueue(object : Callback<TokenModel> {
-                override fun onResponse(call: Call<TokenModel>, response: Response<TokenModel>) {
-                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
-                    Log.i("point #2.3", "Отримана відповідь post запиту: ${response.body()}")
-                }
+                call.enqueue(object : Callback<TokenModel> {
+                    override fun onResponse(
+                        call: Call<TokenModel>,
+                        response: Response<TokenModel>
+                    ) {
+                        if (!response.isSuccessful) throw IOException("Unexpected code $response")
+                        Log.i("point #2.3", "Отримана відповідь post запиту: ${response.body()}")
+                    }
 
-                override fun onFailure(call: Call<TokenModel>, t: Throwable) {
-                    t.printStackTrace()
-                    Log.e("point #2.3", "fun onFailure -> ${t.message.toString()}")
-                }
-            })
-            Log.i("point #2.3", "Кінець post запиту")
+                    override fun onFailure(call: Call<TokenModel>, t: Throwable) {
+                        t.printStackTrace()
+                        Log.e("point #2.3", "fun onFailure -> ${t.message.toString()}")
+                    }
+                })
+                Log.i("point #2.3", "Кінець post запиту")
+            } else {
+                Toast.makeText(this, "Неправильний логін або пароль", Toast.LENGTH_LONG).show()
+                Log.i("point #2.3", "Неправильний логін або пароль")
+            }
         }
     }
 
     companion object {
-        private var login = "380501234567"
-        private var password = "123456"
+        private lateinit var login: String
+        private lateinit var password: String
 
         //#2.1
         private var devman = Build.MANUFACTURER.toString()
