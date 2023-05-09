@@ -139,6 +139,8 @@ class AuthorizationScreenActivity : AppCompatActivity() {
                     ) {
                         if (!response.isSuccessful) throw IOException("Unexpected code $response")
                         Log.i("point #2.3", "Отримана відповідь post запиту: ${response.body()}")
+                        NetworkObject.setToken(response.body()!!.token!!)
+
                     }
 
                     override fun onFailure(call: Call<TokenModel>, t: Throwable) {
