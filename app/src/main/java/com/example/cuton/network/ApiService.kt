@@ -1,11 +1,7 @@
 package com.example.cuton.network
 
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
-
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -13,29 +9,23 @@ interface ApiService {
     fun getApiAddress(
         @Query("appName") appName: String,
         @Query("v") v: String
-    ) : Call<ApiAddressModel>
+    ): Call<ApiAddressModel>
 
     @GET("app/version/latest/")
     fun getAnswer(
         @Query("v") v: String
-    ) : Call<VersionModel>
+    ): Call<VersionModel>
 
+    @Headers("Content-Type: application/x-www-form-urlencoded")
+    @FormUrlEncoded
     @POST("users/login/")
-    fun getToken(
-// TODO crete POST request
-        @Body
-        login: String,
-        password: String,
-        devman: String,
-        devmod: String,
-        devavs: String,
-        devaid: String
-//        @Query(value = "login", encoded = true) login: String?,
-//        @Query(value = "password", encoded = true) password: String?,
-//        @Query(value = "devman", encoded = true) devman: String?,
-//        @Query(value = "devmod", encoded = true) devmod: String?,
-//        @Query(value = "devavs", encoded = true) devavs: String?,
-//        @Query(value = "devaid", encoded = true) devaid: String?
+    fun token(
+        @Field("login") login: String = "380501234567",
+        @Field("password") password: String = "123456",
+        @Field("devman") devman: String = "Xiaomi",
+        @Field("devmod") devmod: String = "RedmiNote",
+        @Field("devavs") devavs: String = "Q",
+        @Field("devaid") devaid: String = "31"
     ) : Call<TokenModel>
 
 }

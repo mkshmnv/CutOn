@@ -11,10 +11,14 @@ import android.widget.Toast
 import com.example.cuton.R
 import com.example.cuton.databinding.ActivityAuthorizationScreenBinding
 import com.example.cuton.network.*
-import okio.IOException
+//import okhttp3.MultipartBody
+//import okhttp3.RequestBody
+//import okhttp3.RequestBody.Companion.toRequestBody
+//import okio.IOException
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.IOException
 
 
 class AuthorizationScreenActivity : AppCompatActivity() {
@@ -31,14 +35,8 @@ class AuthorizationScreenActivity : AppCompatActivity() {
         // add the default theme
         setTheme(R.style.Theme_CutOn)
 
-        login = binding.editTextLogin.text.toString()
-        password = binding.editTextPassword.text.toString()
-
-        //#2.1
-//        Device.setDevman(Build.MANUFACTURER)
-//        Device.setDevmod(Build.MODEL)
-//        Device.setDevavs(Build.VERSION.RELEASE)
-//        Device.setDevaid(Build.ID)
+//        login = binding.editTextLogin.text.toString()
+//        password = binding.editTextPassword.text.toString()
 
         // #2.2
         Log.i(
@@ -46,6 +44,7 @@ class AuthorizationScreenActivity : AppCompatActivity() {
             "Підключаємось до API ${ServiceGenerator.getApiAddress()}/app/version/latest/"
         )
         val serviceGenerator = ServiceGenerator.buildService(ApiService::class.java)
+
         Log.i("point #2.2.1", "GET-параметри запиту: ?v=${NetworkObject.getV()}")
         val call = serviceGenerator.getAnswer(NetworkObject.getV())
 
@@ -103,57 +102,60 @@ class AuthorizationScreenActivity : AppCompatActivity() {
 
         binding.editTextPassword.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             }
 
             override fun afterTextChanged(s: Editable) {
-
                 password = s.toString()
                 Log.i("point #2.3", "Ведено дані в поле password $password")
             }
         })
 
         binding.buttonLogin.setOnClickListener {
-            Log.i("point #2.3", "Кнопка Логін натиснута")
 
-            val call = serviceGenerator.getToken(
-                "380501234567",
-                "123456",
-                "Xiaomi",
-                "RedmiNote",
-                "Q",
-                "31"
+            Log.i("point #2.3", "Кнопка Логін натиснута")
+            Log.i(
+                "point #2.3",
+                "Підключаємось до API ${ServiceGenerator.getApiAddress()}users/login/"
             )
+
+            val call = serviceGenerator.token(
+                login,
+                password,
+                devman,
+                devmod,
+                devavs,
+                devaid
+            )
+
+            Log.i("point #2.3", "Відправлений post запит: ${call.request()}")
 
             call.enqueue(object : Callback<TokenModel> {
                 override fun onResponse(call: Call<TokenModel>, response: Response<TokenModel>) {
                     if (!response.isSuccessful) throw IOException("Unexpected code $response")
-                    Log.e("point #2.3", response.body().toString())
+                    Log.i("point #2.3", "Отримана відповідь post запиту: ${response.body()}")
                 }
 
                 override fun onFailure(call: Call<TokenModel>, t: Throwable) {
                     t.printStackTrace()
-                    Log.e("point #2.3", t.message.toString())
+                    Log.e("point #2.3", "fun onFailure -> ${t.message.toString()}")
                 }
             })
-
-            Log.e("point #2.3", "TODO send POST request")
+            Log.i("point #2.3", "Кінець post запиту")
         }
-
-
     }
+
     companion object {
         private var login = "380501234567"
         private var password = "123456"
 
         //#2.1
-        private var devman = Build.MANUFACTURER
-        private var devmod = Build.MODEL
-        private var devavs = Build.VERSION.RELEASE
-        private var devaid = Build.ID
+        private var devman = Build.MANUFACTURER.toString()
+        private var devmod = Build.MODEL.toString()
+        private var devavs = Build.VERSION.RELEASE.toString()
+        private var devaid = Build.ID.toString()
 
         init {
             Log.i("point #2.1", "Збираємо дані про пристрій")

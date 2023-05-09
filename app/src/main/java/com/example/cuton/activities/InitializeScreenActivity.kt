@@ -17,10 +17,10 @@ import com.example.cuton.network.ApiAddressModel
 import com.example.cuton.network.ApiService
 import com.example.cuton.network.ServiceGenerator
 import okhttp3.*
-import okio.IOException
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.IOException
 
 @Suppress("DEPRECATION")
 class InitializeScreenActivity : AppCompatActivity() {
@@ -69,6 +69,7 @@ class InitializeScreenActivity : AppCompatActivity() {
                 call: Call<ApiAddressModel>,
                 response: Response<ApiAddressModel>
             ) {
+
                 if (!response.isSuccessful) throw IOException("Unexpected code $response")
 
                 val route = response.body()?.route!!
@@ -89,7 +90,7 @@ class InitializeScreenActivity : AppCompatActivity() {
             Log.i("point #1.6", "Наступний екран AuthorizationScreen відкритий")
             startActivity(intent)
             finish()
-        }, 1000) // This the delayed time in milliseconds.
+        }, 2000) // This the delayed time in milliseconds.
     }
 
     private fun checkForInternet(): Boolean {
