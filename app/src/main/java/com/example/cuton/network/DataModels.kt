@@ -4,4 +4,7 @@ data class ApiAddressModel(val route: String? = null)
 
 data class VersionModel(val answer: String? = null)
 
-data class TokenModel(val token: String? = null)
+data class TokenModel(
+    val token: String? = null,
+    val detail: String? = null
+)

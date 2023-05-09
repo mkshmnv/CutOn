@@ -27,7 +27,5 @@ class HomeMenuActivity : AppCompatActivity() {
         binding.buttonProfile.setOnClickListener {
             Toast.makeText(this, "Функція Profile ще не реалізована", Toast.LENGTH_SHORT).show()
         }
-
     }
-
 }

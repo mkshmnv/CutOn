@@ -19,13 +19,13 @@ interface ApiService {
     @Headers("Content-Type: application/x-www-form-urlencoded")
     @FormUrlEncoded
     @POST("users/login/")
-    fun token(
-        @Field("login") login: String = "380501234567",
-        @Field("password") password: String = "123456",
-        @Field("devman") devman: String = "Xiaomi",
-        @Field("devmod") devmod: String = "RedmiNote",
-        @Field("devavs") devavs: String = "Q",
-        @Field("devaid") devaid: String = "31"
+    fun getToken(
+        @Field("login") login: String?,
+        @Field("password") password: String?,
+        @Field("devman") devman: String?,
+        @Field("devmod") devmod: String?,
+        @Field("devavs") devavs: String?,
+        @Field("devaid") devaid: String?
     ) : Call<TokenModel>
 
 }

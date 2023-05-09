@@ -1,20 +1,20 @@
 package com.example.cuton.activities
 
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
 import com.example.cuton.R
 import com.example.cuton.databinding.ActivityAuthorizationScreenBinding
+import com.example.cuton.databinding.ActivityHomeMenuBinding
 import com.example.cuton.network.*
-//import okhttp3.MultipartBody
-//import okhttp3.RequestBody
-//import okhttp3.RequestBody.Companion.toRequestBody
-//import okio.IOException
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -115,44 +115,88 @@ class AuthorizationScreenActivity : AppCompatActivity() {
 
         binding.buttonLogin.setOnClickListener {
             Log.i("point #2.3", "Кнопка Логін натиснута")
-            if (login == "380501234567" && password == "123456") {
-                Log.i(
-                    "point #2.3",
-                    "Підключаємось до API ${ServiceGenerator.getApiAddress()}users/login/"
-                )
+            Log.i(
+                "point #2.3",
+                "Підключаємось до API ${ServiceGenerator.getApiAddress()}users/login/"
+            )
 
-                val call = serviceGenerator.token(
-                    login,
-                    password,
-                    devman,
-                    devmod,
-                    devavs,
-                    devaid
-                )
+            val call = serviceGenerator.getToken(
+                login,
+                password,
+                devman,
+                devmod,
+                devavs,
+                devaid
+            )
 
-                Log.i("point #2.3", "Відправлений post запит: ${call.request()}")
+            Log.i("point #2.3", "Відправлений post запит: ${call.request()}")
 
-                call.enqueue(object : Callback<TokenModel> {
-                    override fun onResponse(
-                        call: Call<TokenModel>,
-                        response: Response<TokenModel>
-                    ) {
-                        if (!response.isSuccessful) throw IOException("Unexpected code $response")
-                        Log.i("point #2.3", "Отримана відповідь post запиту: ${response.body()}")
-                        NetworkObject.setToken(response.body()!!.token!!)
+            call.enqueue(object : Callback<TokenModel> {
+                override fun onResponse(
+                    call: Call<TokenModel>,
+                    response: Response<TokenModel>
+                ) {
+                    Log.i("point #2.3", "Отримана відповідь post запиту: ${response}")
+                    val a = response.body()
 
+                    when (response.code()) {
+                        200 -> {
+                            Log.i(
+                                "point #2.3.3",
+                                "Отримана корректна відповідь, код ${response.code()} " +
+                                        "${response.body()}"
+                            )
+                            NetworkObject.setToken(response.body()!!.token!!)
+
+                            // #2.3.3.2
+                            val intent = Intent(this@AuthorizationScreenActivity, HomeMenuActivity::class.java)
+
+                            Log.i("point #2.3.3.2", "Відкриваємо наступний екран HomeMenu")
+
+                            startActivity(intent)
+                            finish()
+                        }
+                        404 -> {
+                            Toast.makeText(
+                                this@AuthorizationScreenActivity,
+                                "Неправильний логін або пароль",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            Log.i(
+                                "point #2.3.4",
+                                "TODO --->>> \"detail\":\"Wrong login or password\"  -- ${response.body()}"
+                            ) // TODO fix response.body()
+                        }
+                        422 -> {
+                            Toast.makeText(
+                                this@AuthorizationScreenActivity,
+                                "Помилка запросу",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            Log.i(
+                                "point #2.3.4",
+                                "Помилка запросу - 422  -- ${response.body()}"
+                            ) // TODO fix response.body()
+                        }
                     }
+                }
 
-                    override fun onFailure(call: Call<TokenModel>, t: Throwable) {
-                        t.printStackTrace()
-                        Log.e("point #2.3", "fun onFailure -> ${t.message.toString()}")
-                    }
-                })
-                Log.i("point #2.3", "Кінець post запиту")
-            } else {
-                Toast.makeText(this, "Неправильний логін або пароль", Toast.LENGTH_LONG).show()
-                Log.i("point #2.3", "Неправильний логін або пароль")
-            }
+                override fun onFailure(call: Call<TokenModel>, t: Throwable) {
+                    t.printStackTrace()
+                    Log.e("point #2.3", "fun onFailure -> ${t.message.toString()}")
+                }
+            })
+            Log.i("point #2.3", "Кінець post запиту")
+
+//
+//            Handler(Looper.getMainLooper()).postDelayed({
+//                val intent = Intent(this, ActivityHomeMenuBinding::class.java)
+//
+//                Log.i("point #2.3.3.2", "Відкриваємо наступний екран HomeMenu")
+//
+//                startActivity(intent)
+//                finish()
+//            }, 2000) // This the delayed time in milliseconds.
         }
     }
 

@@ -22,7 +22,7 @@ object NetworkObject {
 
     fun getV() = v
 
-    fun setToken(v: String) {
+    fun setToken(token: String) {
         this.token = token
         Log.i("point #2.3.3.1", "Значення token встановлено - $token")
     }
