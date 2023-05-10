@@ -21,11 +21,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/white" />
 
-    <!--    Top Bar    -->
+    <!--    c    -->
     <TextView
         android:id="@+id/textView"
-        android:layout_width="67dp"
-        android:layout_height="33dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="96dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="96dp"
