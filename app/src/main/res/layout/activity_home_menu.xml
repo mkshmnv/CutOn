@@ -8,13 +8,14 @@
     android:orientation="vertical">
 
     <!--    Top Bar    -->
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayoutTopBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="21dp"
-
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="21dp"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,9 +24,8 @@
             android:id="@+id/buttonClose"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:layout_marginStart="21dp"
             android:background="@drawable/close"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:strokeColor="@color/white" />
@@ -39,6 +39,7 @@
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/buttonProfile"
             app:layout_constraintStart_toEndOf="@+id/buttonClose"
             app:layout_constraintTop_toTopOf="parent" />
@@ -48,14 +49,13 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:background="@drawable/profile"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.951"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </LinearLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--    Catalog    -->
+    <!--    Menu Catalog    -->
     <LinearLayout
         android:id="@+id/linearLayoutCatalog"
         android:layout_width="match_parent"
@@ -71,7 +71,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="23dp"
+            android:layout_marginBottom="10dp"
             android:text="Меню"
             android:textAlignment="textStart"
             android:textColor="@color/grey"
@@ -80,7 +80,7 @@
 
         <Button
             android:id="@+id/buttonCatalog"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/catalog"
             app:strokeColor="@color/white" />

@@ -50,7 +50,7 @@ class AuthorizationScreenActivity : AppCompatActivity() {
 
         call.enqueue(object : Callback<VersionModel> {
             override fun onResponse(call: Call<VersionModel>, response: Response<VersionModel>) {
-                if (!response.isSuccessful) throw IOException("Unexpected code $response")
+                if (!response.isSuccessful) throw IOException("Unexpected code $response") // TODO fis first runtime error
 
                 Log.i("point #2.2.2", "Отримана JSON відповідь: ${response.body()}")
                 val answer = response.body()!!.answer!!
