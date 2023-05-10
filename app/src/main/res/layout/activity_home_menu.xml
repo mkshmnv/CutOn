@@ -8,49 +8,52 @@
     android:orientation="vertical">
 
     <!--    Top Bar    -->
-    <Button
-        android:id="@+id/buttonClose"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginEnd="311dp"
-        android:background="@drawable/close"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/white" />
-
-    <!--    c    -->
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayoutTopBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="96dp"
-        android:gravity="center"
-        android:text="@string/app_name"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/buttonProfile"
-        app:layout_constraintStart_toEndOf="@+id/buttonClose"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        android:padding="21dp"
 
-    <!--    Top Bar    -->
-    <Button
-        android:id="@+id/buttonProfile"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="311dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginEnd="21dp"
-        android:background="@drawable/profile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.951"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/buttonClose"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="21dp"
+            android:background="@drawable/close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/white" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/buttonProfile"
+            app:layout_constraintStart_toEndOf="@+id/buttonClose"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/buttonProfile"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@drawable/profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.951"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
 
     <!--    Catalog    -->
     <LinearLayout
@@ -63,7 +66,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutTopBar">
 
         <TextView
             android:layout_width="match_parent"
@@ -96,7 +99,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
-
 
         <LinearLayout
             android:layout_width="20dp"
