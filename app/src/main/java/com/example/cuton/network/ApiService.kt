@@ -11,11 +11,11 @@ interface ApiService {
         @Query("v") v: String
     ): Call<ApiAddressModel>
 
+    // 2.2
     @GET("app/version/latest/")
-    fun getAnswer(
-        @Query("v") v: String
-    ): Call<VersionModel>
+    fun getAnswer(@Query("v") v: String): Call<VersionModel>
 
+    // 2.3
     @Headers("Content-Type: application/x-www-form-urlencoded")
     @FormUrlEncoded
     @POST("users/login/")
@@ -27,5 +27,13 @@ interface ApiService {
         @Field("devavs") devavs: String?,
         @Field("devaid") devaid: String?
     ) : Call<TokenModel>
+
+    // 3.1
+    @GET("users/")
+    fun getUsers(@Query("token") token: String): Call<UsersModel>
+
+    // 3.2
+    @GET("home/menu/items/")
+    fun getItems(@Query("token") token: String): Call<ItemsModel>
 
 }

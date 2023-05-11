@@ -57,6 +57,7 @@ class InitializeScreenActivity : AppCompatActivity() {
             NetworkObject.getV()
         )
 
+        // Logging #1.5.1
         val getRequest = "?appName=${NetworkObject.getAppName()}&v=${NetworkObject.getV()}"
         Log.i(
             "point #1.5.1",
@@ -64,7 +65,6 @@ class InitializeScreenActivity : AppCompatActivity() {
         )
 
         call.enqueue(object : Callback<ApiAddressModel> {
-
             override fun onResponse(
                 call: Call<ApiAddressModel>,
                 response: Response<ApiAddressModel>
