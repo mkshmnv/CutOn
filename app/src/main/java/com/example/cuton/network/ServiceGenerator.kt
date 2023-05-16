@@ -1,13 +1,17 @@
 package com.example.cuton.network
 
+import android.os.Build
 import android.util.Log
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ServiceGenerator {
-    private var apiAddress = "https://cr-test-ribu2uaqea-ey.a.run.app/"
     private val client = OkHttpClient.Builder().build()
+    private var apiAddress = "https://cr-test-ribu2uaqea-ey.a.run.app/"
+    private lateinit var token: String
 
     private var retrofit = Retrofit.Builder()
         .baseUrl(apiAddress)
@@ -15,8 +19,12 @@ object ServiceGenerator {
         .client(client)
         .build()
 
-    fun changeApiAddress(api: String) {
-        apiAddress = api
+    fun <T> buildService(service: Class<T>) = retrofit.create(service)
+
+    fun changeApiAddress(newApiAddress: String) {
+
+        apiAddress = newApiAddress
+
         retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(apiAddress)
@@ -28,7 +36,7 @@ object ServiceGenerator {
 
     fun getApiAddress() = apiAddress
 
-    fun <T> buildService(service: Class<T>): T {
-        return retrofit.create(service)
+    fun setToken(newToken: String) {
+        token = newToken
     }
 }
