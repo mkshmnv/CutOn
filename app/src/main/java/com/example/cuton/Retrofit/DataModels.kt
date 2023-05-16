@@ -1,4 +1,4 @@
-package com.example.cuton.network
+package com.example.cuton.Retrofit
 
 data class ApiAddressModel(val route: String? = null)
 

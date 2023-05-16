@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.cuton.databinding.ActivityHomeMenuBinding
-import com.example.cuton.network.*
+import com.example.cuton.Retrofit.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

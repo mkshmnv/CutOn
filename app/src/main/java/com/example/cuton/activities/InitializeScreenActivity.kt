@@ -11,11 +11,11 @@ import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.cuton.network.Network
+import com.example.cuton.Retrofit.Network
 import com.example.cuton.databinding.ActivityInitializeScreenBinding
-import com.example.cuton.network.ApiAddressModel
-import com.example.cuton.network.ApiService
-import com.example.cuton.network.ServiceGenerator
+import com.example.cuton.Retrofit.ApiAddressModel
+import com.example.cuton.Retrofit.ApiService
+import com.example.cuton.Retrofit.ServiceGenerator
 import okhttp3.*
 import retrofit2.Call
 import retrofit2.Callback

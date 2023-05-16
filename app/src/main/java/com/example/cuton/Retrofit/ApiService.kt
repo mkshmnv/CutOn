@@ -1,4 +1,4 @@
-package com.example.cuton.network
+package com.example.cuton.Retrofit
 
 import retrofit2.Call
 import retrofit2.http.*

@@ -1,4 +1,4 @@
-package com.example.cuton.network
+package com.example.cuton.Retrofit
 
 import android.util.Log
 
