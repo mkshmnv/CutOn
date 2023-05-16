@@ -30,10 +30,10 @@ interface ApiService {
 
     // 3.1
     @GET("users/")
-    fun getUsers(@Query("token") token: String): Call<UsersModel>
+    fun getUsers(@Header("token") token: String): Call<UsersModel>
 
     // 3.2
     @GET("home/menu/items/")
-    fun getItems(@Query("token") token: String): Call<ItemsModel>
+    fun getItems(@Header("token") token: String): Call<ItemsModel>
 
 }
