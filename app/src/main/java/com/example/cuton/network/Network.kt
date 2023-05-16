@@ -2,7 +2,7 @@ package com.example.cuton.network
 
 import android.util.Log
 
-object NetworkObject {
+object Network {
 
     private lateinit var appName: String
     private lateinit var v: String
@@ -22,9 +22,9 @@ object NetworkObject {
 
     fun getV() = v
 
-    fun setToken(token: String) {
-        this.token = token
-        Log.i("point #2.3.3.1", "Значення token встановлено - $token")
+    fun setToken(newToken: String) {
+        this.token = newToken
+        Log.i("point #2.3.3.1", "Значення token встановлено - $newToken")
     }
 
     fun getToken() = token
