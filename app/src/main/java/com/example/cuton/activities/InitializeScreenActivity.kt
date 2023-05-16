@@ -11,7 +11,7 @@ import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.cuton.network.NetworkObject
+import com.example.cuton.network.Network
 import com.example.cuton.databinding.ActivityInitializeScreenBinding
 import com.example.cuton.network.ApiAddressModel
 import com.example.cuton.network.ApiService
@@ -36,10 +36,10 @@ class InitializeScreenActivity : AppCompatActivity() {
         setContentView(view)
 
         // #1.2.1
-        NetworkObject.setAppName("cuton")
+        Network.setAppName("cuton")
 
         // #1.2.2
-        NetworkObject.setV("36")
+        Network.setV("36")
 
         // #1.4
         if (!checkForInternet()) {
@@ -53,12 +53,12 @@ class InitializeScreenActivity : AppCompatActivity() {
         val serviceGenerator = ServiceGenerator.buildService(ApiService::class.java)
         Log.i("point #1.5", "Проводимо підключення до API для отримання адреси API")
         val call = serviceGenerator.getApiAddress(
-            NetworkObject.getAppName(),
-            NetworkObject.getV()
+            Network.getAppName(),
+            Network.getV()
         )
 
         // Logging #1.5.1
-        val getRequest = "?appName=${NetworkObject.getAppName()}&v=${NetworkObject.getV()}"
+        val getRequest = "?appName=${Network.getAppName()}&v=${Network.getV()}"
         Log.i(
             "point #1.5.1",
             "GET-параметри запиту: $getRequest. Повний запит ${ServiceGenerator.getApiAddress()}$getRequest"
