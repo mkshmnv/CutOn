@@ -1,6 +1,5 @@
 package com.example.cuton.activities
 
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +12,6 @@ import android.util.Log
 import android.widget.Toast
 import com.example.cuton.R
 import com.example.cuton.databinding.ActivityAuthorizationScreenBinding
-import com.example.cuton.databinding.ActivityHomeMenuBinding
 import com.example.cuton.network.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -45,8 +43,8 @@ class AuthorizationScreenActivity : AppCompatActivity() {
         )
         val serviceGenerator = ServiceGenerator.buildService(ApiService::class.java)
 
-        Log.i("point #2.2.1", "GET-параметри запиту: ?v=${NetworkObject.getV()}")
-        val call = serviceGenerator.getAnswer(NetworkObject.getV())
+        Log.i("point #2.2.1", "GET-параметри запиту: ?v=${Network.getV()}")
+        val call = serviceGenerator.getAnswer(Network.getV())
 
         call.enqueue(object : Callback<VersionModel> {
             override fun onResponse(call: Call<VersionModel>, response: Response<VersionModel>) {
@@ -61,20 +59,15 @@ class AuthorizationScreenActivity : AppCompatActivity() {
                             "point #2.2.2.1",
                             "answer = 2 - виводемо повідомлення, версія додатку занадто застаріла"
                         )
-                        updateToast(
-                            this@AuthorizationScreenActivity,
-                            "Версія додатку занадто застаріла, авторизація без оновлення не можлива"
-                        )
+                        updateToast("Версія додатку занадто застаріла, авторизація без оновлення не можлива")
                     }
+
                     1 -> {
                         Log.i(
                             "point #2.2.2.2",
                             "answer = 1 - виводемо повідомлення, є більш нова версія додатку"
                         )
-                        updateToast(
-                            this@AuthorizationScreenActivity,
-                            "Доступна нова версія додатку"
-                        )
+                        updateToast("Доступна нова версія додатку")
                     }
                 }
             }
@@ -146,16 +139,22 @@ class AuthorizationScreenActivity : AppCompatActivity() {
                                 "Отримана корректна відповідь, код ${response.code()} " +
                                         "${response.body()}"
                             )
-                            NetworkObject.setToken(response.body()!!.token!!)
+                            Network.setToken(response.body()!!.token!!)
 
                             // #2.3.3.2
-                            val intent = Intent(this@AuthorizationScreenActivity, HomeMenuActivity::class.java)
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                val intent = Intent(
+                                    this@AuthorizationScreenActivity,
+                                    HomeMenuActivity::class.java
+                                )
 
-                            Log.i("point #2.3.3.2", "Відкриваємо наступний екран HomeMenu")
+                                Log.i("point #2.3.3.2", "Відкриваємо наступний екран HomeMenu")
 
-                            startActivity(intent)
-                            finish()
+                                startActivity(intent)
+                                finish()
+                            }, 2000) // This the delayed time in milliseconds.
                         }
+
                         404 -> {
                             Toast.makeText(
                                 this@AuthorizationScreenActivity,
@@ -167,6 +166,7 @@ class AuthorizationScreenActivity : AppCompatActivity() {
                                 "TODO --->>> \"detail\":\"Wrong login or password\"  -- ${response.body()}"
                             ) // TODO fix response.body()
                         }
+
                         422 -> {
                             Toast.makeText(
                                 this@AuthorizationScreenActivity,
@@ -186,17 +186,7 @@ class AuthorizationScreenActivity : AppCompatActivity() {
                     Log.e("point #2.3", "fun onFailure -> ${t.message.toString()}")
                 }
             })
-            Log.i("point #2.3", "Кінець post запиту")
-
-//
-//            Handler(Looper.getMainLooper()).postDelayed({
-//                val intent = Intent(this, ActivityHomeMenuBinding::class.java)
-//
-//                Log.i("point #2.3.3.2", "Відкриваємо наступний екран HomeMenu")
-//
-//                startActivity(intent)
-//                finish()
-//            }, 2000) // This the delayed time in milliseconds.
+            Log.i("point #2.3", "Кінець post запиту") // TODO fix first close post request after open new activity
         }
     }
 
@@ -218,17 +208,19 @@ class AuthorizationScreenActivity : AppCompatActivity() {
             Log.i("point #2.1.4", "ID ОС - devaid > $devaid")
         }
     }
+
+    private fun updateToast(mes: String) {
+        Toast.makeText(
+            this,
+            mes,
+            Toast.LENGTH_SHORT
+        ).show()
+
+        Log.i("point #2.2.x.x", mes)
+    }
 }
 
-private fun updateToast(context: Context, mes: String) {
-    Toast.makeText(
-        context,
-        mes,
-        Toast.LENGTH_SHORT
-    ).show()
 
-    Log.i("point #2.2.x.x", mes)
-}
 
 
 
