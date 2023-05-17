@@ -17,6 +17,7 @@ import com.example.cuton.Retrofit.ApiAddressModel
 import com.example.cuton.Retrofit.ApiService
 import com.example.cuton.Retrofit.ServiceGenerator
 import okhttp3.*
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,17 +52,10 @@ class InitializeScreenActivity : AppCompatActivity() {
 
         // #1.5
         val serviceGenerator = ServiceGenerator.buildService(ApiService::class.java)
-        Log.i("point #1.5", "Проводимо підключення до API для отримання адреси API")
+        Log.i("point #1.5", "Підключаємось до API")
         val call = serviceGenerator.getApiAddress(
             Network.getAppName(),
             Network.getV()
-        )
-
-        // Logging #1.5.1
-        val getRequest = "?appName=${Network.getAppName()}&v=${Network.getV()}"
-        Log.i(
-            "point #1.5.1",
-            "GET-параметри запиту: $getRequest. Повний запит ${ServiceGenerator.getApiAddress()}$getRequest"
         )
 
         call.enqueue(object : Callback<ApiAddressModel> {
@@ -69,18 +63,13 @@ class InitializeScreenActivity : AppCompatActivity() {
                 call: Call<ApiAddressModel>,
                 response: Response<ApiAddressModel>
             ) {
-
                 if (!response.isSuccessful) throw IOException("Unexpected code $response")
-
                 val route = response.body()?.route!!
-                Log.i("point #1.5.2", "Отримана JSON відповідь: ${response.body()}")
-
                 ServiceGenerator.changeApiAddress(route)
             }
 
             override fun onFailure(call: Call<ApiAddressModel>, t: Throwable) {
                 t.printStackTrace()
-                Log.e("point #1.5", "Неотримана JSON відповідь: ${t.message.toString()}")
             }
         })
 

@@ -37,44 +37,25 @@ class AuthorizationScreenActivity : AppCompatActivity() {
         password = "123456" // binding.editTextPassword.text.toString()
 
         // #2.2
-        Log.i(
-            "point #2.2",
-            "Підключаємось до API ${ServiceGenerator.getApiAddress()}/app/version/latest/"
-        )
+        Log.i("point #2.2", "Підключаємось до API")
         val serviceGenerator = ServiceGenerator.buildService(ApiService::class.java)
 
-        Log.i("point #2.2.1", "GET-параметри запиту: ?v=${Network.getV()}")
         val call = serviceGenerator.getAnswer(Network.getV())
 
         call.enqueue(object : Callback<VersionModel> {
             override fun onResponse(call: Call<VersionModel>, response: Response<VersionModel>) {
+
                 if (!response.isSuccessful) throw IOException("Unexpected code $response") // TODO fis first runtime error
 
-                Log.i("point #2.2.2", "Отримана JSON відповідь: ${response.body()}")
                 val answer = response.body()!!.answer!!
-
                 when (answer.toInt()) {
-                    2 -> {
-                        Log.i(
-                            "point #2.2.2.1",
-                            "answer = 2 - виводемо повідомлення, версія додатку занадто застаріла"
-                        )
-                        updateToast("Версія додатку занадто застаріла, авторизація без оновлення не можлива")
-                    }
-
-                    1 -> {
-                        Log.i(
-                            "point #2.2.2.2",
-                            "answer = 1 - виводемо повідомлення, є більш нова версія додатку"
-                        )
-                        updateToast("Доступна нова версія додатку")
-                    }
+                    2 -> updateToast("Версія додатку занадто застаріла, авторизація без оновлення не можлива")
+                    1 -> updateToast("Доступна нова версія додатку")
                 }
             }
 
             override fun onFailure(call: Call<VersionModel>, t: Throwable) {
                 t.printStackTrace()
-                Log.e("point #2.2.x.x", t.message.toString())
             }
         })
 
@@ -108,10 +89,7 @@ class AuthorizationScreenActivity : AppCompatActivity() {
 
         binding.buttonLogin.setOnClickListener {
             Log.i("point #2.3", "Кнопка Логін натиснута")
-            Log.i(
-                "point #2.3",
-                "Підключаємось до API ${ServiceGenerator.getApiAddress()}users/login/"
-            )
+            Log.i("point #2.3", "Підключаємось до API")
 
             val call = serviceGenerator.getToken(
                 login,
@@ -122,23 +100,13 @@ class AuthorizationScreenActivity : AppCompatActivity() {
                 devaid
             )
 
-            Log.i("point #2.3", "Відправлений post запит: ${call.request()}")
-
             call.enqueue(object : Callback<TokenModel> {
                 override fun onResponse(
                     call: Call<TokenModel>,
                     response: Response<TokenModel>
                 ) {
-                    Log.i("point #2.3", "Отримана відповідь post запиту: ${response}")
-                    val a = response.body()
-
                     when (response.code()) {
                         200 -> {
-                            Log.i(
-                                "point #2.3.3",
-                                "Отримана корректна відповідь, код ${response.code()} " +
-                                        "${response.body()}"
-                            )
                             Network.setToken(response.body()!!.token!!)
 
                             // #2.3.3.2
@@ -186,7 +154,10 @@ class AuthorizationScreenActivity : AppCompatActivity() {
                     Log.e("point #2.3", "fun onFailure -> ${t.message.toString()}")
                 }
             })
-            Log.i("point #2.3", "Кінець post запиту") // TODO fix first close post request after open new activity
+            Log.i(
+                "point #2.3",
+                "Кінець post запиту"
+            ) // TODO fix first close post request after open new activity
         }
     }
 
