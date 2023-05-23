@@ -77,16 +77,16 @@ class HomeMenuActivity : AppCompatActivity() {
         // #3.1.1
         val call = serviceGenerator.getItems(token)
 
-        call.enqueue(object : Callback<ItemsModel> {
+        call.enqueue(object : Callback<Items> {
             override fun onResponse(
-                call: Call<ItemsModel>,
-                response: Response<ItemsModel>
+                call: Call<Items>,
+                response: Response<Items>
             ) {
                 if (!response.isSuccessful) throw IOException("Unexpected code $response")
                 // TODO test case
             }
 
-            override fun onFailure(call: Call<ItemsModel>, t: Throwable) {
+            override fun onFailure(call: Call<Items>, t: Throwable) {
                 t.printStackTrace()
             }
         })

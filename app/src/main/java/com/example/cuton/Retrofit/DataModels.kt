@@ -22,4 +22,27 @@ data class UsersModel(
     val bonusTitle: String? = null
 )
 
-data class ItemsModel(val token: String? = null)
+data class Items(
+    val items: Item?
+)
+data class Item(
+    val itemId: Int,
+    val itemName: String,
+    val itemImage: String
+)
+
+
+data class Brands(
+    val brands: BrandId?
+)
+
+data class BrandId(
+    val brand: Brand?
+)
+
+data class Brand(
+    val brandId: Int?,
+    val brandImage: String?,
+    val brandName: String?
+)
+

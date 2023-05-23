@@ -34,6 +34,9 @@ interface ApiService {
 
     // 3.2
     @GET("home/menu/items/")
-    fun getItems(@Query("token") token: String): Call<ItemsModel>
+    fun getItems(@Query("token") token: String): Call<Items>
+
+    @GET("catalog/brands/")
+    fun getBrands(@Query("token") token: String): Call<Brands>
 
 }
