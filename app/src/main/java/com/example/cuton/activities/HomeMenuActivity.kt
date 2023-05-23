@@ -28,6 +28,7 @@ class HomeMenuActivity : AppCompatActivity() {
 
         // #3.1
         usersApiRequest(serviceGenerator)
+        itemsApiRequest(serviceGenerator)
 
         binding.buttonClose.setOnClickListener {
             val intent = Intent(this, LogoutActivity::class.java)
@@ -35,6 +36,7 @@ class HomeMenuActivity : AppCompatActivity() {
         }
 
         binding.buttonCatalog.setOnClickListener {
+
             val intent = Intent(this, CatalogBrandsActivity::class.java)
             startActivity(intent)
         }
@@ -70,7 +72,7 @@ class HomeMenuActivity : AppCompatActivity() {
 
     private fun itemsApiRequest(serviceGenerator: ApiService) {
         // #3.1
-        Log.i("point #3.1", "Підключаємось до API для отримання Items")
+        Log.i("point #3.2", "Підключаємось до API для отримання Items")
 
         // #3.1.1
         val call = serviceGenerator.getItems(token)

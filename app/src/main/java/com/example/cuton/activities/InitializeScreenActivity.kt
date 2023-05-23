@@ -17,7 +17,6 @@ import com.example.cuton.Retrofit.ApiAddressModel
 import com.example.cuton.Retrofit.ApiService
 import com.example.cuton.Retrofit.ServiceGenerator
 import okhttp3.*
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -65,7 +64,7 @@ class InitializeScreenActivity : AppCompatActivity() {
             ) {
                 if (!response.isSuccessful) throw IOException("Unexpected code $response")
                 val route = response.body()?.route!!
-                ServiceGenerator.changeApiAddress(route)
+                ServiceGenerator.setBaseUrl(route)
             }
 
             override fun onFailure(call: Call<ApiAddressModel>, t: Throwable) {
