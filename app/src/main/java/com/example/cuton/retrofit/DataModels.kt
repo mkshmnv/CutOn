@@ -40,7 +40,7 @@ data class Brands(
 )
 
 data class BrandIds(
-    val brand: Brand?
+    val ids: List<Brand>
 )
 
 data class Brand(

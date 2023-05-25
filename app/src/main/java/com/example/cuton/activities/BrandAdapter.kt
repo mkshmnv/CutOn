@@ -17,7 +17,6 @@ class BrandAdapter : RecyclerView.Adapter<BrandAdapter.BrandHolder>() {
         private val binding = BrandItemBinding.bind(brand)
 
         fun bind(brand: Brand) = with(binding) {
-
             Picasso.get().load(brand.brandImageURL).into(ivLogoBrand)
             tvNameBrand.text = brand.brandName
         }

@@ -37,6 +37,6 @@ interface ApiService {
     fun getItems(@Query("token") token: String): Call<Items>
 
     @GET("catalog/brands/")
-    fun getBrands(@Query("token") token: String): Call<Brands>
+    fun getBrands(@Query("token") token: String): Call<BrandIds>
 
 }
