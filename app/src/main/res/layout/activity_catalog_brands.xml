@@ -1,141 +1,67 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.CutOn"
+    android:layout_gravity="center_horizontal"
     android:background="@color/background_app"
     android:orientation="vertical"
-    android:layout_gravity="center_horizontal">
+    android:theme="@style/Theme.CutOn">
 
     <!--    Top Bar    -->
     <TextView
         android:id="@+id/textView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:gravity="center"
         android:text="Каталог брендів"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--    Brands    -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:orientation="vertical"
+    <!--    Catalog Brands    -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCatalogBrands"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="30dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayoutBottom"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:layout_editor_absoluteX="14dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/imageButtonApple"
-                android:layout_width="117dp"
-                android:layout_height="117dp"
-                android:layout_margin="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/apple" />
-
-            <ImageButton
-                android:id="@+id/imageButtonSamsung"
-                android:layout_width="117dp"
-                android:layout_height="117dp"
-                android:layout_margin="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/samsung" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/imageButtonHuawei"
-                android:layout_width="117dp"
-                android:layout_height="117dp"
-                android:layout_margin="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/huawei" />
-
-            <ImageButton
-                android:id="@+id/imageButtonXiaomi"
-                android:layout_width="117dp"
-                android:layout_height="117dp"
-                android:layout_margin="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/xiaomi" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/imageButtonHp"
-                android:layout_width="117dp"
-                android:layout_height="117dp"
-                android:layout_margin="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/hp" />
-
-            <ImageButton
-                android:id="@+id/imageButtonAcer"
-                android:layout_width="117dp"
-                android:layout_height="117dp"
-                android:layout_margin="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/acer" />
-
-        </LinearLayout>
-    </LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <!--    Bottom Bar    -->
     <LinearLayout
         android:id="@+id/constraintLayoutBottom"
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@drawable/bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="20dp"
             android:layout_height="30dp"
             android:layout_margin="25dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <View
                 android:id="@+id/viewHome"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:background="@drawable/home"/>
+                android:background="@drawable/home" />
 
             <View
                 android:layout_width="3dp"
                 android:layout_height="3dp"
+                android:layout_margin="3dp"
                 android:background="@drawable/ellipse"
-                android:backgroundTint="@android:color/transparent"
-                android:layout_margin="3dp"/>
+                android:backgroundTint="@android:color/transparent" />
 
         </LinearLayout>
 
@@ -144,8 +70,8 @@
             android:layout_height="30dp"
             android:layout_margin="25dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <View
                 android:id="@+id/viewUnion"
@@ -157,9 +83,9 @@
             <View
                 android:layout_width="3dp"
                 android:layout_height="3dp"
+                android:layout_margin="3dp"
                 android:background="@drawable/ellipse"
-                android:backgroundTint="@color/green"
-                android:layout_margin="3dp"/>
+                android:backgroundTint="@color/green" />
 
         </LinearLayout>
 
@@ -168,8 +94,8 @@
             android:layout_height="30dp"
             android:layout_margin="25dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <View
                 android:id="@+id/viewCoins"
@@ -180,9 +106,9 @@
             <View
                 android:layout_width="3dp"
                 android:layout_height="3dp"
+                android:layout_margin="3dp"
                 android:background="@drawable/ellipse"
-                android:backgroundTint="@android:color/transparent"
-                android:layout_margin="3dp"/>
+                android:backgroundTint="@android:color/transparent" />
 
         </LinearLayout>
 
@@ -191,21 +117,21 @@
             android:layout_height="30dp"
             android:layout_margin="25dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <View
                 android:id="@+id/viewSupport"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:background="@drawable/support"/>
+                android:background="@drawable/support" />
 
             <View
                 android:layout_width="3dp"
                 android:layout_height="3dp"
+                android:layout_margin="3dp"
                 android:background="@drawable/ellipse"
-                android:backgroundTint="@android:color/transparent"
-                android:layout_margin="3dp"/>
+                android:backgroundTint="@android:color/transparent" />
 
         </LinearLayout>
 
@@ -214,8 +140,8 @@
             android:layout_height="30dp"
             android:layout_margin="25dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <View
                 android:id="@+id/viewSettings"
@@ -226,9 +152,9 @@
             <View
                 android:layout_width="3dp"
                 android:layout_height="3dp"
+                android:layout_margin="3dp"
                 android:background="@drawable/ellipse"
-                android:backgroundTint="@android:color/transparent"
-                android:layout_margin="3dp"/>
+                android:backgroundTint="@android:color/transparent" />
 
         </LinearLayout>
 

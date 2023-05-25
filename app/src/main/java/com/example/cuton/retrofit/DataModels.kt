@@ -1,4 +1,4 @@
-package com.example.cuton.Retrofit
+package com.example.cuton.retrofit
 
 data class ApiAddressModel(val route: String? = null)
 
@@ -32,17 +32,20 @@ data class Item(
 )
 
 
+
+
+
 data class Brands(
-    val brands: BrandId?
+    val brands: BrandIds?
 )
 
-data class BrandId(
+data class BrandIds(
     val brand: Brand?
 )
 
 data class Brand(
     val brandId: Int?,
-    val brandImage: String?,
-    val brandName: String?
+    val brandName: String?,
+    val brandImage: String?
 )
 

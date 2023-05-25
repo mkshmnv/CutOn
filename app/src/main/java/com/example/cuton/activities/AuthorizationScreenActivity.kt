@@ -12,7 +12,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.cuton.R
 import com.example.cuton.databinding.ActivityAuthorizationScreenBinding
-import com.example.cuton.Retrofit.*
+import com.example.cuton.retrofit.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
