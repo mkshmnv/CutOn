@@ -33,8 +33,8 @@ class AuthorizationScreenActivity : AppCompatActivity() {
         // add the default theme
         setTheme(R.style.Theme_CutOn)
 
-        login = "380501234567" // binding.editTextLogin.text.toString()
-        password = "123456" // binding.editTextPassword.text.toString()
+        login = "380501234567" // TODO binding.editTextLogin.text.toString()
+        password = "123456" // TODO binding.editTextPassword.text.toString()
 
         // #2.2
         Log.i("point #2.2", "Підключаємось до API")
@@ -62,7 +62,6 @@ class AuthorizationScreenActivity : AppCompatActivity() {
         // #2.3
         binding.editTextLogin.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {

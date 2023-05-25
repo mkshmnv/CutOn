@@ -46,6 +46,6 @@ data class BrandIds(
 data class Brand(
     val brandId: Int?,
     val brandName: String?,
-    val brandImage: String?
+    val brandImageURL: String?
 )
 

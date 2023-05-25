@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cuton.R
 import com.example.cuton.retrofit.Brand
 import com.example.cuton.databinding.BrandItemBinding
-import com.example.cuton.retrofit.DownloadImageFromInternet
-
+import com.squareup.picasso.Picasso
 
 class BrandAdapter : RecyclerView.Adapter<BrandAdapter.BrandHolder>() {
 
@@ -18,7 +17,8 @@ class BrandAdapter : RecyclerView.Adapter<BrandAdapter.BrandHolder>() {
         private val binding = BrandItemBinding.bind(brand)
 
         fun bind(brand: Brand) = with(binding) {
-            DownloadImageFromInternet(ivLogoBrand).execute(brand.brandImage)
+
+            Picasso.get().load(brand.brandImageURL).into(ivLogoBrand)
             tvNameBrand.text = brand.brandName
         }
     }
