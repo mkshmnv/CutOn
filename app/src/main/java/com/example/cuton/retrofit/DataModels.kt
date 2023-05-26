@@ -36,16 +36,16 @@ data class Item(
 
 
 data class Brands(
-    val brands: BrandIds?
+    val brands: Map<Int, Brand>
 )
 
 data class BrandIds(
-    val ids: List<Brand>
+    val ids: Brand
 )
 
-data class Brand(
+open class Brand(
     val brandId: Int?,
     val brandName: String?,
-    val brandImageURL: String?
+    val brandImage: String?
 )
 

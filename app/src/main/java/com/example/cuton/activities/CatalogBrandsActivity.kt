@@ -1,13 +1,15 @@
 package com.example.cuton.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.cuton.databinding.ActivityCatalogBrandsBinding
 import com.example.cuton.retrofit.ApiService
 import com.example.cuton.retrofit.Brand
-import com.example.cuton.retrofit.BrandIds
 import com.example.cuton.retrofit.Brands
 import com.example.cuton.retrofit.ServiceGenerator
 import retrofit2.Call
@@ -20,7 +22,7 @@ class CatalogBrandsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCatalogBrandsBinding
     private val adapter = BrandAdapter()
 
-    private val brandIdsList = listOf(
+    private var brandsList = listOf(
         Brand(
             2,
             "2E",
@@ -79,16 +81,19 @@ class CatalogBrandsActivity : AppCompatActivity() {
         Log.i("point #3.1", "Підключаємось до API для отримання Brands")
         val call = serviceGenerator.getBrands("MzgwOTM4ODQ1Mzk06T1Wbh")
 
-        call.enqueue(object : Callback<BrandIds> {
-            override fun onResponse(call: Call<BrandIds>, response: Response<BrandIds>) {
+        call.enqueue(object : Callback<Brands> {
+            override fun onResponse(call: Call<Brands>, response: Response<Brands>) {
                 if (!response.isSuccessful) throw IOException("Unexpected code $response") // TODO fis first runtime error
 
-                val brands = response.body()!!
+                val brands = response.body()!!.brands.values.toList()
+                brands.forEach { Log.i("point #4.1.2", "name -> ${it.brandName} Image -> ${it.brandImage}") }
+                brandsList = brands
 
-                Log.i("point #4.1.2", "brands - values: ${brands}")
+
+
             }
 
-            override fun onFailure(call: Call<BrandIds>, t: Throwable) {
+            override fun onFailure(call: Call<Brands>, t: Throwable) {
                 t.printStackTrace()
             }
 
@@ -98,7 +103,11 @@ class CatalogBrandsActivity : AppCompatActivity() {
         binding.rvCatalogBrands.layoutManager = GridLayoutManager(this, 2)
         binding.rvCatalogBrands.adapter = adapter
 
-        adapter.addAllBrands(brandIdsList)
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            adapter.addAllBrands(brandsList)
+        }, 2000) // This the delayed time in milliseconds.
+
 
     }
 

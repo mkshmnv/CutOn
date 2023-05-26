@@ -1,5 +1,6 @@
 package com.example.cuton.retrofit
 
+import com.ebrandIdample.cuton.retrofit.CatalogBrands
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -37,6 +38,6 @@ interface ApiService {
     fun getItems(@Query("token") token: String): Call<Items>
 
     @GET("catalog/brands/")
-    fun getBrands(@Query("token") token: String): Call<BrandIds>
+    fun getBrands(@Query("token") token: String): Call<Brands>
 
 }
