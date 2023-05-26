@@ -1,6 +1,5 @@
 package com.example.cuton.retrofit
 
-import com.ebrandIdample.cuton.retrofit.CatalogBrands
 import retrofit2.Call
 import retrofit2.http.*
 
