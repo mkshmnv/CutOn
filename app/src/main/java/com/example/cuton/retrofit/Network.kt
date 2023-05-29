@@ -1,4 +1,4 @@
-package com.example.cuton.Retrofit
+package com.example.cuton.retrofit
 
 import android.util.Log
 
